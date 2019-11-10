@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href='/static/style.css' />
+</head>
+
+ <body>
+        <a href="/"><h1>OddJob</h1></a>
+       <h2>CUSTOMER HOME</h2>
+
+        <fieldset>
+            <legend>Account Info</legend>
+            <p>email: {{session['account']['email']}}</p>
+            <p>name: {{session['account']['firstname']}} {{session['account']['lastname']}}</p>
+             <a href="/profile">Profile</a>
+            <br>
+            <a href="/jobpost">Post Job</a>
+            <br>
+            <a href="/logout">Logout</a>
+            <br>
+        </fieldset>
+
+        <fieldset>
+            <legend><h2>Your Job Requests</h2></legend>
+
+            {% if postedJobs %}
+            <table>
+                <th>Job Name</th>
+                <th>Job Type</th>
+                <th>job City</th>
+                <th>job State</th>
+                <th>job Description</th>
+                <th>Actions</th>
+
+                {% for line in postedJobs %}
+                    <tr>
+                        <td>{{line.jobname}}</td>
+                        <td>{{line.jobtype}}</td>
+                        <td>{{line.jobcity}}</td>
+                        <td>{{line.jobstate}}</td>
+                        <td>{{line.jobdescription}}</td>
+                        <td><a href="/job/{{line.jobid}}">view</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+             {% else %}
+            <h3>Empty</h3>
+            {% endif %}
+        </fieldset>
+
+
+        <fieldset>
+            <legend><h2>Job To Be Performed</h2></legend>
+
+            {% if confirmedJobs %}
+            <table>
+                <th>Job Name</th>
+                <th>Job Type</th>
+                <th>job City</th>
+                <th>job State</th>
+                <th>job Description</th>
+                <th>Amount</th>
+                <th>Worker Email</th>
+                <th>Complete</th>
+                <th>Pay</th>
+                {% for line in confirmedJobs %}
+                    <tr>
+                        <td>{{line.jobname}}</td>
+                        <td>{{line.jobtype}}</td>
+                        <td>{{line.jobcity}}</td>
+                        <td>{{line.jobstate}}</td>
+                        <td>{{line.jobdescription}}</td>
+                        <td>{{line.amount}}</td>
+                        <td><a href="/viewworker/{{line.acceptoremail}}">{{line.acceptoremail}}</a></td>
+                        <td> <form action="/completeJobAuth" method="POST">
+                            <input type="hidden" name='jobId' value={{line.jobid}} />
+                            <input type="submit" value = Complete>
+                        </form>
+                        <td>
+                        <form action="/payJobAuth" method="POST">
+                            <input type="hidden" name='jobId' value={{line.jobid}} />
+                            <input type="submit" value = Pay>
+                        </form>
+                    </td>
+
+                    </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <h3>Empty</h3>
+            {% endif %}
+        </fieldset>
+
+        <fieldset>
+            <legend><h2>Completed Job History</h2></legend>
+
+             {% if completedJobs %}
+            <table>
+                <th>Job Name</th>
+                <th>Job Type</th>
+                <th>job City</th>
+                <th>job State</th>
+                <th>job Description</th>
+                <th>Job Acceptor</th>
+                <th>Job Amount</th>
+                <th>Job Time</th>
+                <th>Rating</th>
+                {% for line in completedJobs %}
+                   <tr>
+                        <td>{{line.jobname}}</td>
+                        <td>{{line.jobtype}}</td>
+                        <td>{{line.jobcity}}</td>
+                        <td>{{line.jobstate}}</td>
+                        <td>{{line.jobdescription}}</td>
+                        <td><a href="/viewworker/{{line.acceptoremail}}">{{line.acceptoremail}}</a></td>
+                        <td>{{line.amount}}</td>
+                        <td>{{line.jobtime}}</td>
+
+                        {% if line.rating %}
+                            <td>{{line.rating}} : {{line.comment}}</td>
+                        {% else %}
+                            <td> 
+                                <form action="/rateAuth" method="POST">
+                                <input type="hidden" name="jobId" value="{{line.jobid}}" display='none' />
+                                <select name ="rating" id = "ratingList">
+                                   <option value = "1">1</option>
+                                   <option value = "2">2</option>
+                                   <option value = "3">3</option>
+                                   <option value = "4">4</option>
+                                   <option value = "5">5</option>
+                                </select>
+                                <input type="text" name = "comment" placeholder="Leave A Comment" required/> </br>
+                                <button type="submit">Rate</button>
+                            </form></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+             {% else %}
+            <h3>Empty</h3>
+            {% endif %}
+        </fieldset>
+
+
+</html>

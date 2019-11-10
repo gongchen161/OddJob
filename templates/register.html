@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OddJob | Register</title>
+        <link rel="stylesheet" href='/static/style.css' />
+    </head>
+
+
+   <body>
+   		<a href="/"><h1>OddJob</h1></a>
+
+   		<fieldset>
+   			<legend><h2>{{type}} Register</h2></legend>
+	   		{% if session['message'] %}
+				<p><strong>{{session['message']}}</strong></p>
+			{% endif %}
+
+		<form action="/registerAuth" method="POST">
+			First Name:
+			<input type="text" name = "firstName" placeholder="First Name" required/> </br>
+			Last Name:
+			<input type="text" name = "lastName" placeholder="Last Name" required/> </br>
+			Email:
+			<input type="email" name = "email" placeholder="Email" required/> </br>
+			Password:
+			<input type="password" name = "password1" placeholder="Password" required/></br>
+			Confirm Password:
+			<input type="password" name = "password2" placeholder="Password" required/></br>
+			<input type="hidden" name='accountType' value='{{type}}' />
+			<button type="submit">Register</button>
+		</form>
+
+	</fieldset>
+
+
+</body>
+</html>

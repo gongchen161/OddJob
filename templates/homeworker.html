@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href='/static/style.css' />
+</head>
+
+ <body>
+        <a href="/"><h1>OddJob</h1></a>
+         <h2>WORKER HOME</h2>
+        <fieldset>
+            <legend>Account Info</legend>
+            <p>email: {{session['account']['email']}}</p>
+            <p>name: {{session['account']['firstname']}} {{session['account']['lastname']}}</p>
+             <a href="/profile">Profile</a>
+            <br>
+            <a href="/jobboard">View Job Board,</a>
+            <br>
+            <a href="/logout">Logout</a>
+            <br>
+        </fieldset>
+
+         <fieldset>
+            <legend><h2>Your Pending Jobs</h2></legend>
+
+            {% if acceptedJobs %}
+            <table>
+                <th>Job Name</th>
+                <th>Job Type</th>
+                <th>job City</th>
+                <th>job State</th>
+                <th>job Description</th>
+                <th>amount</th>
+                <th>time</th>
+
+                {% for line in acceptedJobs %}
+                    <tr>
+                        <td>{{line.jobname}}</td>
+                        <td>{{line.jobtype}}</td>
+                        <td>{{line.jobcity}}</td>
+                        <td>{{line.jobstate}}</td>
+                        <td>{{line.jobdescription}}</td>
+                         <td>{{line.amount}}</td>
+                        <td>{{line.transactiontime}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+             {% else %}
+            <h3>Empty</h3>
+            {% endif %}
+        </fieldset>
+
+
+        <fieldset>
+            <legend><h2>Job To Be Performed</h2></legend>
+
+            {% if confirmedJobs %}
+            <table>
+                <th>Job Name</th>
+                <th>Job Type</th>
+                <th>job City</th>
+                <th>job State</th>
+                <th>job Description</th>
+                <th>amount</th>
+                <th>time</th>
+
+                {% for line in confirmedJobs %}
+                    <tr>
+                        <td>{{line.jobname}}</td>
+                        <td>{{line.jobtype}}</td>
+                        <td>{{line.jobcity}}</td>
+                        <td>{{line.jobstate}}</td>
+                        <td>{{line.jobdescription}}</td>
+                         <td>{{line.amount}}</td>
+                        <td>{{line.transactiontime}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+             {% else %}
+            <h3>Empty</h3>
+            {% endif %}
+        </fieldset>
+
+        <fieldset>
+            <legend><h2>Completed Job History</h2></legend>
+
+             {% if completedJobs %}
+             <table>
+                <th>Job Name</th>
+                <th>Job Type</th>
+                <th>job City</th>
+                <th>job State</th>
+                <th>job Description</th>
+                <th>amount</th>
+                <th>time</th>
+                <th>rating</th>
+
+                {% for line in completedJobs %}
+                    <tr>
+                        <td>{{line.jobname}}</td>
+                        <td>{{line.jobtype}}</td>
+                        <td>{{line.jobcity}}</td>
+                        <td>{{line.jobstate}}</td>
+                        <td>{{line.jobdescription}}</td>
+                         <td>{{line.amount}}</td>
+                        <td>{{line.transactiontime}}</td>
+                        <td>{{line.rating}} : {{line.comment}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+             {% else %}
+            <h3>Empty</h3>
+            {% endif %}
+        </fieldset>
+
+
+</html>

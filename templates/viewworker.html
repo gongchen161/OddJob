@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OddJob | VIEW WORKER</title>
+        <link rel="stylesheet" href='/static/style.css' />
+    </head>
+
+
+   <body>
+   		<a href="/"><h1>OddJob</h1></a>
+   		<fieldset>
+			<p>Name: {{worker['firstname']}} {{worker['lastname']}}</p>
+			<p>Motto: {{worker['motto']}}</p>
+			<p>Job Performed: {{ total }}</p>
+			<p>Average Rating: {{ rating }}</p>
+		</fieldset>
+
+
+		{% for line in trans %}
+		<fieldset>
+		<legend>{{line.jobname}} ({{line.jobtype}})</legend>
+		<p>Job Detail: {{line.jobdescription}}</p>
+		<p>Rating : {{line.rating}}</p> 
+	    <p>Comment: {{line.comment}}</p>
+		<p>Time: {{line.transactiontime}}</p>
+		</fieldset>
+		{% endfor %}
+
+</body>
+</html>

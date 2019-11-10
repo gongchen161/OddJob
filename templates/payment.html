@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href='/static/style.css' />
+</head>
+
+ <body>
+        <a href="/"><h1>OddJob</h1></a>
+
+        <fieldset>
+            <legend>Account Info</legend>
+            <p>email: {{session['account']['email']}}</p>
+            <p>name: {{session['account']['firstname']}} {{session['account']['lastname']}}</p>
+             <a href="/profile">Profile</a>
+            <br>
+            <a href="/jobpost">Post Job</a>
+            <br>
+            <a href="/logout">Logout</a>
+            <br>
+        </fieldset>
+
+        <fieldset>
+            <legend><h2>Pay For Job</h2></legend>
+
+            <table>
+                <th>Job Name</th>
+                <th>Job Type</th>
+                <th>job City</th>
+                <th>job State</th>
+                <th>job Description</th>
+                <th>Amount</th>
+                <th>Worker Email</th>
+                <tr>
+                    <td>{{line.jobname}}</td>
+                    <td>{{line.jobtype}}</td>
+                    <td>{{line.jobcity}}</td>
+                    <td>{{line.jobstate}}</td>
+                    <td>{{line.jobdescription}}</td>
+                    <td>{{line.amount}}</td>
+                    <td>{{line.acceptoremail}}</td>
+                </tr>
+            </table>
+
+
+            <form action="/payAuth" method="post">
+              <script
+                src="https://checkout.stripe.com/checkout.js"
+                class="stripe-button"
+                data-key="{{ key }}"
+                data-description="Job"
+                data-amount="{{line.amount * 100}} "
+                data-locale="auto">
+              </script>
+    </form>
+
+
+
+
+        </fieldset>
+
+       
+        </fieldset>
+
+
+</html>

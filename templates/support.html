@@ -1,0 +1,35 @@
+<html>
+    <head>
+         <link rel="stylesheet" href='/static/style.css' />
+    </head>
+
+	<body>
+		<h2>Hi {{session['account']}}</h2> 
+        <br>
+		<a href="/logout">Logout</a>
+
+
+        <fieldset>
+            <h2>Add Comment</h2>
+            <form action="/addMessage" method="POST">
+                <input type="textarea" name = "info" placeholder="Place Your Comment" required/> </br>
+                <input type="submit" value = Post />
+            </form>
+        </fieldset>
+
+
+
+        <fieldset>
+            <h2>Here are the comments:</h2>
+        
+                {% for line in comments %}
+                    <fieldset>
+                       <h3> {{line.info}}</h3>
+                       <h4> -- {{line.email}} on {{line.messagetime}}<h4>
+                    </fieldset>
+                {% endfor %}
+         </fieldset>
+
+
+    </body>
+</html>

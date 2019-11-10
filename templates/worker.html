@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href='/static/style.css' />
+</head>
+
+ <body>
+        <a href="/"><h1>OddJob</h1></a>
+        {% if not session.get('account') %}
+
+            <a href="/login/WORKER">Login (Worker)</a>
+            <br>
+            <a href="/register/WORKER">Register (Worker)</a>
+            <br>
+        {% else %}
+           <fieldset>
+            <legend>Account Info</legend>
+            <p>email: {{session['account']['email']}}</p>
+            <p>name: {{session['account']['firstname']}} {{session['account']['lastname']}}</p>
+             <a href="/profile">Profile</a>
+            <br>
+            <a href="/homeworker">Home</a>
+            <br>
+            <a href="/logout">Logout</a>
+            <br>
+        </fieldset>
+        {% endif %}
+
+        <fieldset>
+        <legend><h1>How To Become An OddJob Worker</h1></legend>
+        <p>As an OddJob worker .....</p>
+        </fieldset>
+</html>

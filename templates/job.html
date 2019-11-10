@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href='/static/style.css' />
+</head>
+
+ <body>
+        <a href="/"><h1>OddJob</h1></a>
+       <fieldset>
+            <legend>Account Info</legend>
+            <p>email: {{session['account']['email']}}</p>
+            <p>name: {{session['account']['firstname']}} {{session['account']['lastname']}}</p>
+              <a href="/profile">Profile</a>
+            <br>
+            <a href="/home">Home</a>
+            <br>
+            <a href="/logout">Logout</a>
+            <br>
+        </fieldset>
+        <fieldset>
+            <h2>Job Info:</h2>
+
+            <p>Job Name : {{ job.jobname }}</p>
+            <p>Job Type : {{job.jobtype}}</p>
+            <p>Job City : {{job.jobcity}}</p>
+            <p>Job State : {{job.jobstate}}</p>
+            <p>Job Desccription : {{job.jobdescription}}</p>
+            <p>Request Time : {{job.jobtime}}</p>
+
+            {% if trans %}
+            <table>
+                <tr>
+                <th>Acceptor Email</th>
+                <th>Acceptor Name</th>
+                <th>Amount Offered</th>
+                 <th>Time</th>
+                <th>Offer The Job</th>
+            </tr>
+
+                {% for line in trans %}
+                    <tr>
+                        <td><a href="/viewworker/{{line.acceptoremail}}">{{line.acceptoremail}}</a></td>
+                         <td>{{line.firstname}} {{line.lastname}}</td>
+                        <td>{{line.amount}}</td>
+                        <td>{{line.transactiontime}}</td>
+                         <td>
+                        <form action="/confirmJobAuth" method="POST">
+                            <input type="hidden" name='acceptorEmail' value={{line.acceptoremail}} display='none' />
+                            <input type="hidden" name='jobId' value={{job.jobid}} display='none' />
+                            <button type="submit">Agree</button> 
+                        </form>
+                        <td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <h2>No one has offer the job</h2>
+            {% endif %}
+        </fieldset>
+
+</html>
