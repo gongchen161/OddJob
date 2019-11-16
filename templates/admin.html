@@ -1,0 +1,15 @@
+{% if applications %}
+	{% for line in applications %}
+	<fieldset>
+		<form action="/approveSkillAuth" method="POST">
+			<p>WORKER email: {{line.email}}</p>
+			<p>SKILL : {{line.skillname}}</p>
+			<input type="hidden" name='email' value="{{line.email}}" />
+			<input type="hidden" name='skillname' value="{{line.skillname}}" />
+			<button type="submit">Approve</form>
+		</form>
+	</fieldset>
+	{% endfor %}
+{% else %}
+	<h3>No Skill Application Found</h3>
+{% endif %} 

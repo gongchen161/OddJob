@@ -57,12 +57,13 @@ CREATE TABLE IF NOT EXISTS Skill(
     FOREIGN KEY (email) REFERENCES Account(email)
 );
 
-CREATE TABLE IF NOT EXISTS Address(
+CREATE TABLE IF NOT EXISTS Message(
+    messageid INT AUTO_INCREMENT,
+    jobid INT,
     email VARCHAR(50), 
-    address CHAR(200), 
-    city CHAR(50),
-    state CHAR(20),
-    type CHAR(20),
-    PRIMARY KEY (email, type),
-    FOREIGN KEY (email) REFERENCES Account(email)
+    messagetime Timestamp,
+    quote VARCHAR(500),
+    PRIMARY KEY (messageid),
+    FOREIGN KEY (email) REFERENCES Account(email),
+    FOREIGN KEY (jobid) REFERENCES Job(jobid)
 );

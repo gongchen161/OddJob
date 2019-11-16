@@ -75,6 +75,7 @@
             <button type="submit">Search</button>
         </form>
     </fieldset>
+    {% if jobs %}
     {% for line in jobs %}
     <fieldset>
         <legend><h2>{{line.jobname}}</h2></legend>
@@ -94,6 +95,10 @@
                 </form>
 
     </fieldset>
-        {% endfor %}
-
+    {% endfor %}
+    {% else %}
+    <fieldset>
+        <h3>No Jobs Found</h3>
+    </fieldset>
+    {% endif %}
 {% endblock %}

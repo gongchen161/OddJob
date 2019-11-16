@@ -12,7 +12,10 @@
             <p>Job State : {{job.jobstate}}</p>
             <p>Job Desccription : {{job.jobdescription}}</p>
             <p>Request Time : {{job.jobtime}}</p>
-
+            <p>Status : {{job.jobstatus}}</p>
+</fieldset>
+{% if job.jobstatus=='POSTED' %}
+<fieldset>
             {% if trans %}
             <table>
                 <tr>
@@ -35,16 +38,89 @@
                             <input type="hidden" name='jobId' value={{job.jobid}} display='none' />
                             <button type="submit">Agree</button> 
                         </form>
-                        <td>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
             {% else %}
             <h2>No one has offer the job</h2>
             {% endif %}
-        </fieldset>
         <form action="/cancelJobAuth" method="POST">
             <input type="hidden" name='jobid' value='{{job.jobid}}' />
              <button type="submit">Cancel This Job</button> 
         </form>
+    </fieldset>
+
+    {% else %}
+    <fieldset>
+        <legend>
+            <h2>Communication History</h2>
+        </legend>
+
+        {% if messages %}
+            {% for line in messages %}
+            <p>{{line.email}}</p>
+            <p>{{line.quote}}</p>
+            <p>{{line.messagetime}}</p>
+            <hr>
+            {% endfor %}
+        {% else %}
+            <h3>No Message History</h3>
+            <hr>
+        {% endif %}
+
+        <form action="/addMessageAuth" method="POST">
+            <input type="textarea" name = "quote" placeholder="Place Your Message" required/> </br>
+            <input type="hidden" name='jobid' value='{{job.jobid}}' />
+            <input type="hidden" name='email' value="{{ session['account']['email'] }}" />
+            <input type="submit" value = Post />
+        </form>
+
+    </fieldset>
+
+    {% if session['account']['accounttype']=='CUSTOMER' and job.jobstatus == 'CONFIRMED' %}
+     <form action="/completeJobAuth" method="POST">
+        <input type="hidden" name='jobId' value={{job.jobid}} />
+        <input type="submit" value = Complete>
+    </form>
+
+                            
+    <form action="/payJobAuth" method="POST">
+        <input type="hidden" name='jobId' value={{job.jobid}} />
+        <input type="submit" value = Pay>
+    </form>
+    {% endif %}
+
+
+    {% if job.jobstatus == 'COMPLETED' %}
+    <fieldset>
+        <legend>Rating</legend>
+        {% if rate %}
+            <h3>Rating: {{rate.rating}}</h3>
+            <h3>Comment: {{rate.comment}}</h3>
+            <h3>Time: {{rate.ratingtime}}</h3>
+    </fieldset>
+        {% elif session['account']['accounttype']=='CUSTOMER' %}
+        <fieldset>
+        <legend>Rating</legend>
+        <form action="/rateAuth" method="POST">
+            <input type="hidden" name="jobId" value="{{job.jobid}}" display='none' />
+            <select name ="rating" id = "ratingList">
+               <option value = "1">1</option>
+               <option value = "2">2</option>
+               <option value = "3">3</option>
+               <option value = "4">4</option>
+               <option value = "5">5</option>
+            </select>
+            <input type="text" name = "comment" placeholder="Leave A Comment" required/> </br>
+            <button type="submit">Rate</button>
+        </form>
+        </fieldset>
+        {% endif %}
+    {% endif %}
+
+
+
+    {%endif%}
+
 {% endblock %}

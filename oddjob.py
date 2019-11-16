@@ -5,6 +5,7 @@ from account import Account
 from job import Job
 from transaction import Transaction
 from skill import Skill
+from message import Message
 #Initialize the app from Flask
 app = Flask(__name__)
 
@@ -19,6 +20,11 @@ conn = pymysql.connect(host='localhost',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
 
+
+@app.route('/admin')
+def admin():
+    applications = Skill.getPendingApplications(conn)
+    return render_template('admin.html', applications=applications)
 
 # CUSTOMER Index
 @app.route('/')
@@ -82,8 +88,8 @@ def jobBoard():
         return render_template('error.html')
 
     email = session['account']['email']
-    jobs = Job.getAllOpenJobs(conn, email)
     approvedSkills = Skill.getApprovedSkills(conn, email)
+    jobs = None
     return render_template('jobboard.html', jobs=jobs,approvedSkills=approvedSkills)
 
 
@@ -233,7 +239,7 @@ def completeJobAuth():
     jobId = str(request.form['jobId'])
     Transaction.completeTransaction(conn, jobId, session['account']['email'])
     
-    return redirect(url_for('home'))
+    return redirect(url_for('viewJob', id=jobId))
 
 
 #Define route for login
@@ -285,19 +291,21 @@ def updateProfileAuth():
 #Define route for login
 @app.route('/job/<id>')
 def viewJob(id):
-     #Only the Customer can access this page
-    if (session['account'] == None or session['account']['accounttype'] != "CUSTOMER"):
+ 
+    if (session['account'] == None):
         return render_template('error.html')
 
     job = Job.getJobInfo(conn, id)
+    acceptor = Job.getAcceptor(conn, id)
+    # Only the owner of this Job and the acceptor of this job can view the detail of this job
+    if (job['requestoremail'] == session['account']['email'] or (acceptor is not None and acceptor['acceptoremail'] == session['account']['email'])):
+        trans = Job.getAllTransactions(conn, id)
+        rate = Job.getRating(conn, id)
+        messages = Message.getAllMessages(conn, id)
 
-    # Only the owner of this Job can view the detail of this job
-    if (job['requestoremail'] != session['account']['email']):
-        return render_template('error.html')
+        return render_template('job.html', job=job, trans=trans, messages=messages, rate=rate)
 
-    trans = Job.getAllTransactions(conn, id)
-
-    return render_template('job.html', job=job, trans=trans)
+    return render_template('error.html')
 
 #Define route for login
 @app.route('/viewworker/<email>')
@@ -362,12 +370,43 @@ def searchJobAuth():
     if not session.get('account'):
         return redirect(url_for('index'))
 
+    email = session['account']['email']
+    approvedSkills = Skill.getApprovedSkills(conn, email)
+    if ('jobType' not in request.form):
+        return render_template('jobboard.html', jobs=None,approvedSkills=approvedSkills)
+    if ('jobState' not in request.form):
+        return render_template('jobboard.html', jobs=None,approvedSkills=approvedSkills)
+   
     jobType = request.form['jobType']
     jobState = request.form['jobState']
 
     jobs = Job.getJobSearchResult(conn, jobType, jobState)
-    approvedSkills = Skill.getApprovedSkills(conn, email)
     return render_template('jobboard.html', jobs=jobs,approvedSkills=approvedSkills)
+
+@app.route('/addMessageAuth', methods=['GET', 'POST'])
+def addMessageAuth():
+    #redirect to user's home
+    if not session.get('account'):
+        return redirect(url_for('index'))
+
+    jobid = request.form['jobid']
+    email = request.form['email']
+    quote = request.form['quote']
+
+    Message.addMessage(conn, jobid, email, quote)
+
+    return redirect(url_for('viewJob', id=jobid))
+
+@app.route('/approveSkillAuth', methods=['GET', 'POST'])
+def approveSkillAuth():
+
+    email = request.form['email']
+    skillname = request.form['skillname']
+
+    Skill.approveSkill(conn, email, skillname)
+
+    return redirect(url_for('admin'))
+
 
 app.secret_key = 'ODDJOB'
 

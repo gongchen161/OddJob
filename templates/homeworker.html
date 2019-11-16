@@ -47,6 +47,7 @@
                 <th>job Description</th>
                 <th>amount</th>
                 <th>time</th>
+                <th>view</th>
 
                 {% for line in confirmedJobs %}
                     <tr>
@@ -57,6 +58,7 @@
                         <td>{{line.jobdescription}}</td>
                          <td>{{line.amount}}</td>
                         <td>{{line.transactiontime}}</td>
+                        <td><a href="/job/{{line.jobid}}">view</a></td>
                     </tr>
                 {% endfor %}
             </table>
@@ -78,7 +80,7 @@
                 <th>amount</th>
                 <th>time</th>
                 <th>rating</th>
-
+                <td>Action</td>
                 {% for line in completedJobs %}
                     <tr>
                         <td>{{line.jobname}}</td>
@@ -89,6 +91,7 @@
                          <td>{{line.amount}}</td>
                         <td>{{line.transactiontime}}</td>
                         <td>{{line.rating}} : {{line.comment}}</td>
+                        <td><a href="/job/{{line.jobid}}">view</a></td>
                     </tr>
                 {% endfor %}
             </table>

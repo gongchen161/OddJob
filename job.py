@@ -25,6 +25,20 @@ class Job:
         return data
 
     @staticmethod
+    def getAcceptor(conn, jobid):
+
+        cursor = conn.cursor()
+
+        query = 'SELECT * FROM Transaction WHERE jobid = %s AND (status= %s OR status=%s)'
+        cursor.execute(query, (jobid, 'CONFIRMED', 'COMPLETED'))
+
+        data = cursor.fetchone()
+
+        cursor.close()
+
+        return data
+
+    @staticmethod
     def getConfirmedJobs(conn, email):
 
         cursor = conn.cursor()
@@ -162,3 +176,16 @@ class Job:
         cursor.execute(query, (id))
 
         cursor.close()
+
+    @staticmethod
+    def getRating(conn, id):
+        #cursor used to send queries
+        cursor = conn.cursor()
+        #executes query
+        query = 'SELECT * FROM Rate WHERE jobid=%s'
+        cursor.execute(query, (id))
+
+        data=cursor.fetchone()
+
+        cursor.close()
+        return data

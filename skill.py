@@ -66,5 +66,27 @@ class Skill:
 
 		return result
 
+	@staticmethod
+	def getPendingApplications(conn):
+
+		cursor = conn.cursor()
+
+		q = 'SELECT * FROM Skill WHERE status=%s'
+
+		cursor.execute(q, ('PENDING'))
+		
+		data = cursor.fetchall()
+
+		return data
+
+	@staticmethod
+	def approveSkill(conn, email, skillName):
+		cursor = conn.cursor()
+		print(email, skillName)
+		query = 'UPDATE Skill SET status = %s WHERE email = %s AND skillname = %s'
+		cursor.execute(query, ('APPROVED', email, skillName))
+		conn.commit()
+		cursor.close()
+
 
 
