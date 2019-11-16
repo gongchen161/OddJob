@@ -1,25 +1,8 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <link rel="stylesheet" href='/static/style.css' />
-</head>
 
- <body>
-        <a href="/"><h1>OddJob</h1></a>
-
-        <fieldset>
-            <legend>Account Info</legend>
-            <p>email: {{session['account']['email']}}</p>
-            <p>name: {{session['account']['firstname']}} {{session['account']['lastname']}}</p>
-             <a href="/profile">Profile</a>
-            <br>
-            <a href="/jobpost">Post Job</a>
-            <br>
-            <a href="/logout">Logout</a>
-            <br>
-        </fieldset>
-
+{% extends "layout.html" %}
+ 
+{% block content %} 
         <fieldset>
             <legend><h2>Pay For Job</h2></legend>
 
@@ -62,5 +45,4 @@
        
         </fieldset>
 
-
-</html>
+{% endblock %}

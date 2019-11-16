@@ -4,6 +4,7 @@ import pymysql.cursors
 from account import Account
 from job import Job
 from transaction import Transaction
+from skill import Skill
 #Initialize the app from Flask
 app = Flask(__name__)
 
@@ -18,16 +19,17 @@ conn = pymysql.connect(host='localhost',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
 
+
 # CUSTOMER Index
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', type='CUSTOMER')
 
 
 #WORKER Index
 @app.route('/worker')
 def indexWorker():
-    return render_template('worker.html')
+    return render_template('worker.html', type='WORKER')
 
 #CUSTOMER Home
 @app.route('/home')
@@ -310,11 +312,35 @@ def viewWorker(email):
 
     return render_template('viewworker.html', worker=worker, rating=rating,total=total,trans=trans)
 
+#Define route for login
+@app.route('/backgroundcheck')
+def backgroundCheck():
+     #Only the Customer can access this page
+    if (session['account'] == None or session['account']['accounttype'] != "WORKER"):
+        return render_template('error.html')
+    remainingSkills = Skill.getRemainingSkills(conn, session['account']['email'])
+    pendingSkills = Skill.getPendingSkills(conn, session['account']['email'])
+    approvedSkills = Skill.getApprovedSkills(conn, session['account']['email'])
+    return render_template('backgroundcheck.html', remainingSkills=remainingSkills, pendingSkills=pendingSkills, approvedSkills=approvedSkills)
 
+
+#Define route for login
+@app.route('/backgroundCheckAuth', methods=['GET', 'POST'])
+def backgroundCheckAuth():
+    #redirect to user's home
+    if not session.get('account'):
+        return redirect(url_for('index'))
+
+
+    email = session['account']['email']
+    skills = request.form.getlist('skill')
+
+    for skill in skills:
+        Skill.applySkill(conn, email, skill)
+
+    return redirect(url_for('homeWorker'))
 
 app.secret_key = 'ODDJOB'
-
-
 
 if __name__ == "__main__":
     app.run('127.0.0.1', 5000, debug = True)

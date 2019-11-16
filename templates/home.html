@@ -1,27 +1,11 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <link rel="stylesheet" href='/static/style.css' />
-</head>
 
- <body>
-        <a href="/"><h1>OddJob</h1></a>
-       <h2>CUSTOMER HOME</h2>
+{% extends "layout.html" %}
 
-        <fieldset>
-            <legend>Account Info</legend>
-            <p>email: {{session['account']['email']}}</p>
-            <p>name: {{session['account']['firstname']}} {{session['account']['lastname']}}</p>
-             <a href="/profile">Profile</a>
-            <br>
-            <a href="/jobpost">Post Job</a>
-            <br>
-            <a href="/logout">Logout</a>
-            <br>
-        </fieldset>
+ 
+{% block content %} 
 
-        <fieldset>
+<fieldset>
             <legend><h2>Your Job Requests</h2></legend>
 
             {% if postedJobs %}
@@ -142,6 +126,4 @@
             <h3>Empty</h3>
             {% endif %}
         </fieldset>
-
-
-</html>
+{% endblock %}

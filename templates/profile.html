@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>OddJob | POST JOB</title>
-        <link rel="stylesheet" href='/static/style.css' />
-    </head>
 
 
-   <body>
-   		<a href="/"><h1>OddJob</h1></a>
-
+{% extends "layout.html" %}
+ 
+{% block content %} 
    		{% if session['message'] %}
 			<p><strong>{{session['message']}}</strong></p>
 		{% endif %}
@@ -21,7 +15,4 @@
 			Motto: <input type="text" name="motto" value="{{session['account']['motto']}}"><br>			
 			<button type="submit">Submit</button>
 		</form>
-
-
-</body>
-</html>
+{% endblock %}

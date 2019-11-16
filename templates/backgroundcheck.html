@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+ 
+{% block content %} 
+
+<fieldset>
+   			<legend><h2>{{type}} Background Check Application</h2></legend>
+	   		{% if session['message'] %}
+				<p><strong>{{session['message']}}</strong></p>
+			{% endif %}
+
+		<form action="/backgroundCheckAuth" method="POST">
+			First Name: {{session['account']['firstname']}}</br>
+			Last Name: {{session['account']['lastname']}} </br>
+			Email: {{session['account']['email']}} </br>
+			Remaining Skills to Apply:<br>
+			{% for line in remainingSkills %}
+			 <input type="checkbox" name="skill" value="{{line}}">{{line}}<br>
+			{% endfor %}
+		<button type="submit">Apply</button>
+		</form>
+
+	</fieldset>
+
+
+	<fieldset>
+   		<legend><h2>Pending Skills Application</h2></legend>
+
+			{% for line in pendingSkills %}
+			 <p>{{line}}</p>
+			{% endfor %}
+
+	</fieldset>
+
+	<fieldset>
+   		<legend><h2>Approved Skills</h2></legend>
+
+			{% for line in approvedSkills %}
+			 <p>{{line}}</p>
+			{% endfor %}
+
+	</fieldset>
+
+{% endblock %}
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href='/static/style.css' />
+</head>
+
+ <body>
+        <div id="nav-wrap">
+            <div class="nav">
+                {% if not session.get('account') and type =='CUSTOMER' %}
+                    <a href="/" >HOME</a>
+                {% elif not session.get('account') and type =='WORKER' %}
+                    <a href="/worker" >HOME</a>
+                 {% elif session['account']['accounttype'] == 'CUSTOMER' %}
+                    <a href="/" >HOME</a>
+                {% elif session['account']['accounttype'] == 'WORKER' %}
+                    <a href="/worker" >HOME</a>
+                {% endif %}
+                <div class="nav-right">
+                    {% if not session.get('account') and type =='CUSTOMER' %}
+                        <a href="/login/CUSTOMER" >Login</a>
+                        <a href="/register/CUSTOMER" >Register</a>
+                        <a href="/worker" >Become A Worker</a>
+                    {% elif not session.get('account') and type =='WORKER' %}
+                        <a href="/login/WORKER" >Login</a>
+                        <a href="/register/WORKER" >Register</a>
+                        <a href="/" >I'm A Customer</a>
+                     {% elif session['account']['accounttype'] == 'CUSTOMER' %}
+                        <a href="/home" >My Jobs</a>
+                        <a href="/jobpost" >Post A Job</a>
+                        <a href="/profile" >Account</a>
+                    {% elif session['account']['accounttype'] == 'WORKER' %}
+                        <a href="/homeworker" >My Jobs</a>
+                        <a href="/jobboard" >View Open Jobs</a>
+                        <a href="/profile" >Account</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-wrap">
+           &nbsp;&nbsp;&nbsp;
+        </div>
+
+        <div class="empty-wrap">
+           &nbsp;&nbsp;&nbsp;
+        </div>
+
+        <div id="content-wrap">
+            {% block content %}  {% endblock %}
+        </div>
+
+          <div id="footer-wrap">
+            Contact Us At support@oddjob.com
+        </div>
+       
+</html>

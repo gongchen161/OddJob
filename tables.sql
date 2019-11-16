@@ -47,3 +47,22 @@ CREATE TABLE IF NOT EXISTS Rate(
     FOREIGN KEY (jobid) REFERENCES Job(jobid),
     FOREIGN KEY (requestoremail) REFERENCES Account(email)
 );
+
+
+CREATE TABLE IF NOT EXISTS Skill(
+    email VARCHAR(50), 
+    skillname CHAR(64), 
+    status CHAR(64), 
+    PRIMARY KEY (email, skillname),
+    FOREIGN KEY (email) REFERENCES Account(email)
+);
+
+CREATE TABLE IF NOT EXISTS Address(
+    email VARCHAR(50), 
+    address CHAR(200), 
+    city CHAR(50),
+    state CHAR(20),
+    type CHAR(20),
+    PRIMARY KEY (email, type),
+    FOREIGN KEY (email) REFERENCES Account(email)
+);

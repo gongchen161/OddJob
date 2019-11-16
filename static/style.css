@@ -1,3 +1,12 @@
+body {
+  width:100%;
+  height:100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #b0cc70;
+}
+
 table, th, td {
     border: 1px solid black;
 }
@@ -27,10 +36,89 @@ button {
   border: none;
   cursor: pointer;
   width: 60%;
+  text-align:center;
 }
 
 /* Add a hover effect for buttons */
 button:hover {
   opacity: 0.8;
   background-color: #4B84DA;
+}
+
+
+#nav-wrap {
+  overflow: hidden;
+  background-color: #b0cc70;
+  position: fixed;
+  height: 40px;
+  width: 100%;
+  top: 0;
+  margin:0;
+  padding:0;
+  display: inline-block;
+}
+
+#nav-wrap a {
+  display: inline-block;
+  margin: 0px;
+  margin-right: -7px;
+  color: black;
+  text-align: center;
+  font-size: 15px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+#nav-wrap a:hover {
+  background-color: #88c202;
+  color: white;
+}
+
+.nav {
+  overflow: hidden;
+  margin:0;
+  padding:0;
+    font-family: "Comic Sans MS", Arial, sans-serif;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.nav p {
+  margin:0;
+  padding:0;
+  padding-left:4px;
+  display:inline-block;
+}
+
+.nav a.selected {
+  background-color: #ffcc66;
+  color: white;
+}
+
+
+.nav-right {
+
+  overflow: hidden;
+  right: 0;
+  margin:0;
+  padding:0;
+  position: fixed;
+  display: inline-block;
+}
+
+.empty-wrap {
+  display:block
+  min-height:20;
+}
+
+#content-wrap {
+  overflow: hidden;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 30px;
+  background-color: white;
+}
+
+#footer-wrap {
+  padding: 50px;
 }

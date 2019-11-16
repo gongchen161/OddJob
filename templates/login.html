@@ -1,32 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>OddJob | Log In</title>
-        <link rel="stylesheet" href='/static/style.css' />
-    </head>
+{% extends "layout.html" %}
+ 
+{% block content %} 
 
+	<fieldset>
+		<legend><h2>{{type}} Log In</h2></legend>
+		{% if session['message'] %}
+		<p><strong>{{session['message']}}</strong></p>
+		{% endif %}
 
-   <body>
-   		<a href="/"><h1>OddJob</h1></a>
-
-   		<fieldset>
-   			<legend><h2>{{type}} LogIn</h2></legend>
-	   		{% if session['message'] %}
-				<p><strong>{{session['message']}}</strong></p>
+		<form action="/loginAuth" method="POST">
+			Email:
+			<input type="email" name = "email" placeholder="Email" required/> </br>
+			Password
+			<input type="password" name = "password" placeholder="Password" required/></br>
+			<input type="hidden" name='accountType' value='{{type}}' />
+			<button type="submit">Log In</button>
+			{% if error %}
+				<p class="error"><strong>Error:</strong> {{error}}</p>
 			{% endif %}
-
-			<form action="/loginAuth" method="POST">
-				Email:
-				<input type="email" name = "email" placeholder="Email" required/> </br>
-				Password
-				<input type="password" name = "password" placeholder="Password" required/></br>
-				<input type="hidden" name='accountType' value='{{type}}' />
-				<button type="submit">Log In</button>
-				{% if error %}
-					<p class="error"><strong>Error:</strong> {{error}}</p>
-				{% endif %}
-			</form>
-		</fieldset>
-
-</body>
-</html>
+		</form>
+	</fieldset>
+{% endblock %}

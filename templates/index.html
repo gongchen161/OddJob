@@ -1,36 +1,40 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
+ 
+{% block content %} 
+<fieldset>
+    <legend><h1>What Is Odd Job</h1></legend>
+    <p>Odd Job is .....</p>
+</fieldset>
 
-<head>
-    <link rel="stylesheet" href='/static/style.css' />
-</head>
+<fieldset>
+    <legend><h1>....</h1></legend>
+    <p>Odd Job  .....</p>
+</fieldset>
 
- <body>
-        <a href="/"><h1>OddJob</h1></a>
-        {% if not session.get('account') %}
 
-            <a href="/login/CUSTOMER">Login</a>
-            <br>
-            <a href="/register/CUSTOMER">Register</a>
-            <br>
-             <br>
-            <a href="/worker">I'm a Worker</a>
-        {% else %}
-            <fieldset>
-            <legend>Account Info</legend>
-            <p>email: {{session['account']['email']}}</p>
-            <p>name: {{session['account']['firstname']}} {{session['account']['lastname']}}</p>
-             <a href="/profile">Profile</a>
-            <br>
-            <a href="/home">Home</a>
-            <br>
-            <a href="/logout">Logout</a>
-            <br>
-        </fieldset>
-        {% endif %}
+<fieldset>
+    <legend><h1>.....</h1></legend>
+    <p>Odd Job is .....</p>
+</fieldset>
 
-        <fieldset>
-        <legend><h1>What Is Odd Job</h1></legend>
-        <p>Odd Job is .....</p>
-        </fieldset>
-</html>
+<fieldset>
+    <legend><h1>.....</h1></legend>
+    <p>Odd Job is .....</p>
+</fieldset>
+
+<fieldset>
+    <legend><h1>.....</h1></legend>
+    <p>Odd Job is .....</p>
+</fieldset>
+
+<fieldset>
+    <legend><h1>.....</h1></legend>
+    <p>Odd Job is .....</p>
+</fieldset>
+
+<fieldset>
+    <legend><h1>.....</h1></legend>
+    <p>Odd Job is .....</p>
+</fieldset>
+{% endblock %}
+            
