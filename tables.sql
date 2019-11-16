@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS Transaction(
     acceptoremail VARCHAR(50),
     status VARCHAR(20),
     amount DOUBLE,
+    note VARCHAR(200),
     transactiontime Timestamp,
     PRIMARY KEY (jobid, acceptoremail),
     FOREIGN KEY (jobid) REFERENCES Job(jobid),

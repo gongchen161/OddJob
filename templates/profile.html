@@ -7,6 +7,8 @@
 			<p><strong>{{session['message']}}</strong></p>
 		{% endif %}
 
+		<fieldset>
+		<legend><h2>Basic Info</h2></legend>
 		<form action="/updateProfileAuth" method="POST">
 			<p>Email: {{session['account']['email']}}</p>
 			<p>Account Type: {{session['account']['accounttype']}}</p>
@@ -15,4 +17,19 @@
 			Motto: <input type="text" name="motto" value="{{session['account']['motto']}}"><br>			
 			<button type="submit">Submit</button>
 		</form>
+		</fieldset>
+
+		<fieldset>
+		<legend><h2>Change Password</h2></legend>
+		{% if session['message'] %}
+		<p><strong>{{session['message']}}</strong></p>
+		{% endif %}
+		<form action="/changePasswordAuth" method="POST">
+			Old Password: <input type="password" name = "oldpassword" required/><br>
+			New Password: <input type="password" name = "newpassword1" required/><br>
+			Confirm Password: <input type="password" name = "newpassword2" required/><br>			
+			<button type="submit">Submit</button>
+		</form>
+		</fieldset>
+
 {% endblock %}

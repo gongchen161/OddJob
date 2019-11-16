@@ -106,4 +106,27 @@ class Account:
 
 		return data
 
+	@staticmethod
+	def comparePassword(conn, email, password):
+		#cursor used to send queries
+		cursor = conn.cursor()
+
+		query = 'SELECT * FROM Account WHERE email=%s AND password=SHA2(%s, 256)'
+		cursor.execute(query, (email, password))
+		conn.commit()
+
+		data = cursor.fetchone()
+		cursor.close()
+
+		return cursor.rowcount==1
+
+	@staticmethod
+	def updatePassword(conn, email, password):
+		#cursor used to send queries
+		cursor = conn.cursor()
+
+		query = 'UPDATE Account SET password=SHA2(%s, 256) WHERE email=%s'
+		cursor.execute(query, (password, email))
+		conn.commit()
+
 

@@ -15,6 +15,7 @@
                 <th>job State</th>
                 <th>job Description</th>
                 <th>amount</th>
+                <th>note</th>
                 <th>time</th>
 
                 {% for line in acceptedJobs %}
@@ -25,6 +26,7 @@
                         <td>{{line.jobstate}}</td>
                         <td>{{line.jobdescription}}</td>
                          <td>{{line.amount}}</td>
+                          <td>{{line.note}}</td>
                         <td>{{line.transactiontime}}</td>
                     </tr>
                 {% endfor %}
@@ -46,6 +48,7 @@
                 <th>job State</th>
                 <th>job Description</th>
                 <th>amount</th>
+                <th>note</th>
                 <th>time</th>
                 <th>view</th>
 
@@ -57,6 +60,7 @@
                         <td>{{line.jobstate}}</td>
                         <td>{{line.jobdescription}}</td>
                          <td>{{line.amount}}</td>
+                         <td>{{line.note}}</td>
                         <td>{{line.transactiontime}}</td>
                         <td><a href="/job/{{line.jobid}}">view</a></td>
                     </tr>

@@ -29,18 +29,20 @@ def admin():
 # CUSTOMER Index
 @app.route('/')
 def index():
+    session['message'] = None
     return render_template('index.html', type='CUSTOMER')
 
 
 #WORKER Index
 @app.route('/worker')
 def indexWorker():
+    session['message'] = None
     return render_template('worker.html', type='WORKER')
 
 #CUSTOMER Home
 @app.route('/home')
 def home():
-
+    session['message'] = None
     #Only CUSTOMER can access this page
     if (session['account'] == None or session['account']['accounttype'] != "CUSTOMER"):
         return render_template('error.html')
@@ -58,7 +60,7 @@ def home():
 #WORKER Home
 @app.route('/homeworker')
 def homeWorker():
-
+    session['message'] = None
     #Only WORKER can access this page
     if (session['account'] == None or session['account']['accounttype'] != "WORKER"):
         return render_template('error.html')
@@ -76,13 +78,13 @@ def profile():
      #Only WORKER can access this page
     if (session['account'] == None):
         return render_template('error.html')
-
     return render_template('profile.html')
 
 
 #Define a route to hello function
 @app.route('/jobboard')
 def jobBoard():
+    session['message'] = None
      #Only WORKER can access the job board
     if (session['account'] == None or session['account']['accounttype'] != "WORKER"):
         return render_template('error.html')
@@ -115,7 +117,6 @@ def login(type):
 #Authenticates the register
 @app.route('/registerAuth', methods=['GET', 'POST'])
 def registerAuth():
-    session['message'] = None
 
     #grabs information from the forms
     firstName = str(request.form['firstName'])
@@ -174,6 +175,7 @@ def logout():
 #Define route for login
 @app.route('/jobpost')
 def jobPost():
+    session['message'] = None
      #Only CUSTOMER can post a job
     if (session['account'] == None or session['account']['accounttype'] != "CUSTOMER"):
         return render_template('error.html')
@@ -207,6 +209,7 @@ def acceptJobAuth():
     trans = Transaction()
     trans.jobId = str(request.form['jobId'])
     trans.amount = str(request.form['jobAmount'])
+    trans.note = str(request.form['note'])
     trans.acceptorEmail = session['account']['email']
 
     trans.postTransaction(conn)
@@ -264,7 +267,7 @@ def rateAuth():
     comment = str(request.form['comment'])
     Transaction.rateTransaction(conn, jobId, rating, comment)
     
-    return redirect(url_for('home'))
+    return redirect(url_for('viewJob', id=jobId))
 
 
 
@@ -291,7 +294,7 @@ def updateProfileAuth():
 #Define route for login
 @app.route('/job/<id>')
 def viewJob(id):
- 
+    session['message'] = None
     if (session['account'] == None):
         return render_template('error.html')
 
@@ -310,6 +313,7 @@ def viewJob(id):
 #Define route for login
 @app.route('/viewworker/<email>')
 def viewWorker(email):
+    session['message'] = None
      #Only the Customer can access this page
     if (session['account'] == None or session['account']['accounttype'] != "CUSTOMER"):
         return render_template('error.html')
@@ -326,6 +330,7 @@ def viewWorker(email):
 #Define route for login
 @app.route('/backgroundcheck')
 def backgroundCheck():
+    session['message'] = None
      #Only the Customer can access this page
     if (session['account'] == None or session['account']['accounttype'] != "WORKER"):
         return render_template('error.html')
@@ -406,6 +411,25 @@ def approveSkillAuth():
     Skill.approveSkill(conn, email, skillname)
 
     return redirect(url_for('admin'))
+
+
+@app.route('/changePasswordAuth', methods=['GET', 'POST'])
+def changePasswordAuth():
+
+    email = session['account']['email']
+    oldPassword = request.form['oldpassword']
+    newPassword1 = request.form['newpassword1']
+    newPassword2 = request.form['newpassword2']
+    same = Account.comparePassword(conn, email, oldPassword)
+    if (newPassword1 != newPassword2):
+        session['message'] = 'Password does not match'
+    elif not same:
+        session['message'] = 'Old password is wrong'
+    else:
+        Account.updatePassword(conn, email, newPassword1)
+        session['message'] = 'Password changed'
+
+    return redirect(url_for('profile'))
 
 
 app.secret_key = 'ODDJOB'

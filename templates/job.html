@@ -22,8 +22,9 @@
                 <th>Acceptor Email</th>
                 <th>Acceptor Name</th>
                 <th>Amount Offered</th>
+                <th>Note</th>
                  <th>Time</th>
-                <th>Offer The Job</th>
+                <th>Agree to Offer The Job</th>
             </tr>
 
                 {% for line in trans %}
@@ -31,12 +32,13 @@
                         <td><a href="/viewworker/{{line.acceptoremail}}">{{line.acceptoremail}}</a></td>
                          <td>{{line.firstname}} {{line.lastname}}</td>
                         <td>{{line.amount}}</td>
+                        <td>{{line.note}}</td>
                         <td>{{line.transactiontime}}</td>
                          <td>
                         <form action="/confirmJobAuth" method="POST">
                             <input type="hidden" name='acceptorEmail' value={{line.acceptoremail}} display='none' />
                             <input type="hidden" name='jobId' value={{job.jobid}} display='none' />
-                            <button type="submit">Agree</button> 
+                            <button type="submit">Offer</button> 
                         </form>
                         </td>
                     </tr>
@@ -94,14 +96,12 @@
 
     {% if job.jobstatus == 'COMPLETED' %}
     <fieldset>
-        <legend>Rating</legend>
-        {% if rate %}
+        <legend><h2>Rating</h2></legend>
+        {% if rate and rate.rating %}
             <h3>Rating: {{rate.rating}}</h3>
             <h3>Comment: {{rate.comment}}</h3>
             <h3>Time: {{rate.ratingtime}}</h3>
-    </fieldset>
         {% elif session['account']['accounttype']=='CUSTOMER' %}
-        <fieldset>
         <legend>Rating</legend>
         <form action="/rateAuth" method="POST">
             <input type="hidden" name="jobId" value="{{job.jobid}}" display='none' />

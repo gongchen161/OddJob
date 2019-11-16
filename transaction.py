@@ -6,6 +6,7 @@ class Transaction:
         self.rating = None
         self.status = None
         self.amount = None
+        self.note = None
 
     def postTransaction(self, conn):
       	#cursor used to send queries
@@ -13,8 +14,8 @@ class Transaction:
         #executes quer
         jobTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        ins = 'INSERT INTO Transaction (jobid, acceptoremail, status,amount, transactiontime ) VALUES(%s, %s, %s, %s, %s)'
-        cursor.execute(ins, (self.jobId, self.acceptorEmail, "PENDING", self.amount, jobTime))
+        ins = 'INSERT INTO Transaction (jobid, acceptoremail, status,amount, note, transactiontime ) VALUES(%s, %s, %s, %s, %s, %s)'
+        cursor.execute(ins, (self.jobId, self.acceptorEmail, "PENDING", self.amount, self.note, jobTime))
         conn.commit()
         cursor.close()
 
