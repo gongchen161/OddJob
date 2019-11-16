@@ -135,3 +135,30 @@ class Job:
         cursor.close()
 
         return data
+
+    @staticmethod
+    def getJobSearchResult(conn, jobType, jobState):
+        #cursor used to send queries
+        cursor = conn.cursor()
+        #executes query
+        query = 'SELECT * FROM Job WHERE jobType=%s AND jobState=%s'
+        cursor.execute(query, (jobType, jobState))
+        #stores the results in a variable
+        data = cursor.fetchall()
+        #use fetchall() if you are expecting more than 1 data row
+        cursor.close()
+
+        return data
+
+
+    @staticmethod
+    def cancelJob(conn, id):
+        #cursor used to send queries
+        cursor = conn.cursor()
+        #executes query
+        query = 'DELETE FROM Transaction WHERE jobid = %s'
+        cursor.execute(query, (id))
+        query = 'DELETE FROM Job WHERE jobid = %s'
+        cursor.execute(query, (id))
+
+        cursor.close()

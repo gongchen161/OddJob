@@ -5,16 +5,16 @@
 
 
 		<fieldset>
-			<legend>Post Your Job</legend>
+			<legend><h2>Post Your Job</h2></legend>
 			<form action="/jobPostAuth" method="POST">
 				JobName
 				<input type="text" name = "jobName" placeholder="Job Name" required/> </br>
 				Job Type<br>
+
 	             <select name ="jobType" id = "jobTypeList">
-	               <option value = "landscaping">Landscaping</option>
-	               <option value = "babySitting">Baby Sitting</option>
-	               <option value = "homeService">Home Service</option>
-	               <option value = "cleaning">Cleaning</option>
+	             {% for line in allSkills %}
+	               <option value = "{{line}}">{{line}}</option>
+	              {% endfor %}
 	             </select><br>
 	            Job City
 				<input type="text" name = "jobCity" placeholder="Job City" required/> </br>

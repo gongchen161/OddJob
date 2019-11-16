@@ -1,0 +1,126 @@
+body {
+  width:100%;
+  height:100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #c6ecd9;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+
+
+form {
+  border: 3px solid #f1f1f1;
+}
+
+
+input, select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #91B5EC;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+  background-color: #4B84DA;
+}
+
+
+#nav-wrap {
+  overflow: hidden;
+  background-color: #c6ecd9;
+  position: fixed;
+  height: 40px;
+  width: 100%;
+  top: 0;
+  margin:0;
+  padding:0;
+  display: inline-block;
+}
+
+#nav-wrap a {
+  display: inline-block;
+  margin: 0px;
+  margin-right: -7px;
+  color: black;
+  text-align: center;
+  font-size: 15px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+#nav-wrap a:hover {
+  background-color: #53c68c;
+  color: white;
+}
+
+.nav {
+  overflow: hidden;
+  margin:0;
+  padding:0;
+    font-family: "Comic Sans MS", Arial, sans-serif;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.nav p {
+  margin:0;
+  padding:0;
+  padding-left:4px;
+  display:inline-block;
+}
+
+.nav a.selected {
+  background-color: #ffcc66;
+  color: white;
+}
+
+
+.nav-right {
+
+  overflow: hidden;
+  right: 0;
+  margin:0;
+  padding:0;
+  position: fixed;
+  display: inline-block;
+}
+
+.empty-wrap {
+  display:block
+  min-height:20;
+  background-color: white;
+}
+
+#content-wrap {
+  overflow: hidden;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 30px;
+  background-color: white;
+}
+
+#footer-wrap {
+  padding: 50px;
+}

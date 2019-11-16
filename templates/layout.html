@@ -2,7 +2,16 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href='/static/style.css' />
+    {% if not session.get('account') and type =='CUSTOMER' %}
+        <link rel="stylesheet" href='/static/customerStyle.css' />
+    {% elif not session.get('account') and type =='WORKER' %}
+        <link rel="stylesheet" href='/static/workerStyle.css' />
+     {% elif session['account']['accounttype'] == 'CUSTOMER' %}
+        <link rel="stylesheet" href='/static/customerStyle.css' />
+    {% elif session['account']['accounttype'] == 'WORKER' %}
+       <link rel="stylesheet" href='/static/workerStyle.css' />
+    {% endif %}
+
 </head>
 
  <body>
@@ -30,10 +39,11 @@
                         <a href="/home" >My Jobs</a>
                         <a href="/jobpost" >Post A Job</a>
                         <a href="/profile" >Account</a>
+                        <a href="/logout" >Logout</a>
                     {% elif session['account']['accounttype'] == 'WORKER' %}
                         <a href="/homeworker" >My Jobs</a>
                         <a href="/jobboard" >View Open Jobs</a>
-                        <a href="/profile" >Account</a>
+                        <a href="/logout" >Logout</a>
                     {% endif %}
                 </div>
             </div>
@@ -46,6 +56,15 @@
         <div class="empty-wrap">
            &nbsp;&nbsp;&nbsp;
         </div>
+
+              <div class="empty-wrap">
+           &nbsp;&nbsp;&nbsp;
+        </div>
+
+        <div class="empty-wrap">
+           &nbsp;&nbsp;&nbsp;
+        </div>
+
 
         <div id="content-wrap">
             {% block content %}  {% endblock %}

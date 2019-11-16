@@ -43,4 +43,8 @@
             <h2>No one has offer the job</h2>
             {% endif %}
         </fieldset>
+        <form action="/cancelJobAuth" method="POST">
+            <input type="hidden" name='jobid' value='{{job.jobid}}' />
+             <button type="submit">Cancel This Job</button> 
+        </form>
 {% endblock %}

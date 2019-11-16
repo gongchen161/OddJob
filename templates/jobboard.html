@@ -4,28 +4,96 @@
  
 {% block content %} 
 
- <fieldset>
-            <legend><h2>All Open Jobs</h2></legend>
+    <h2> Open Jobs </h2>
+    <fieldset>
+        <legend><h2>Search</h2></legend>
+        <form action="/searchJobAuth" method="POST">
+            Your Approved Job Type: <br>
 
-            {% for line in jobs %}
-            <fieldset>
-                <legend><h2>{{line.jobname}}</h2></legend>
-                <p>Job Type: {{line.jobtype}}</p>
-                <p>job City: {{line.jobcity}}</p>
-                <p>job State: {{line.jobstate}}</p>
-                 <p>job Description: {{line.jobdescription}}</p>
-                  <p>Requestor Name: {{line.firstname}} {{line.lastname}}</p>
-                   <p>Request time: {{line.jobtime}}</p>
+                 <select name ="jobType" id = "jobTypeList">
+                <option disabled selected value> -- Your Approved Skills -- </option>
+                 {% for line in approvedSkills %}
+                   <option value = "{{line}}">{{line}}</option>
+                  {% endfor %}
+                 </select><br>
+            Job State<br>
 
-            
-                        <form action="/acceptJobAuth" method="POST">
-                            <input type="hidden" name='jobId' value={{line.jobid}} />
-                            <input type="text" name = "jobAmount" placeholder="How Much Do You Want To Offer" required/> </br>
-                            <button type="submit">Submit</button>
-                        </form>
+                <select name="jobState" id="jobStateList">
+                <option disabled selected value> -- Select A State -- </option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">District Of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select><br>
+            <button type="submit">Search</button>
+        </form>
+    </fieldset>
+    {% for line in jobs %}
+    <fieldset>
+        <legend><h2>{{line.jobname}}</h2></legend>
+        <p>Job Type: {{line.jobtype}}</p>
+        <p>job City: {{line.jobcity}}</p>
+        <p>job State: {{line.jobstate}}</p>
+         <p>job Description: {{line.jobdescription}}</p>
+          <p>Requestor Name: {{line.firstname}} {{line.lastname}}</p>
+           <p>Request time: {{line.jobtime}}</p>
 
-                </fieldset>
-                {% endfor %}
-        </fieldset>
+    
+                <form action="/acceptJobAuth" method="POST">
+                    <input type="hidden" name='jobId' value={{line.jobid}} />
+                    Amount To Offer: <input type="text" name = "jobAmount" placeholder="How Much Do You Want To Offer" required/> </br>
+                     Note To the Requestor: <input type="text" name = "jobAmount" placeholder="Additional Thing You Want the Requestor To Know About You" required/> </br>
+                    <button type="submit">Submit</button>
+                </form>
+
+    </fieldset>
+        {% endfor %}
 
 {% endblock %}

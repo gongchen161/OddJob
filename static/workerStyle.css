@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #b0cc70;
+  background-color: #ffd9b3;
 }
 
 table, th, td {
@@ -35,8 +35,9 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 60%;
-  text-align:center;
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%
 }
 
 /* Add a hover effect for buttons */
@@ -48,7 +49,7 @@ button:hover {
 
 #nav-wrap {
   overflow: hidden;
-  background-color: #b0cc70;
+  background-color: #ffd9b3;
   position: fixed;
   height: 40px;
   width: 100%;
@@ -70,7 +71,7 @@ button:hover {
 }
 
 #nav-wrap a:hover {
-  background-color: #88c202;
+  background-color: #ff8000;
   color: white;
 }
 
@@ -109,6 +110,7 @@ button:hover {
 .empty-wrap {
   display:block
   min-height:20;
+  background-color: white;
 }
 
 #content-wrap {

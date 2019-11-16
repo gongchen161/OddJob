@@ -83,7 +83,8 @@ def jobBoard():
 
     email = session['account']['email']
     jobs = Job.getAllOpenJobs(conn, email)
-    return render_template('jobboard.html', jobs=jobs)
+    approvedSkills = Skill.getApprovedSkills(conn, email)
+    return render_template('jobboard.html', jobs=jobs,approvedSkills=approvedSkills)
 
 
 
@@ -170,7 +171,9 @@ def jobPost():
      #Only CUSTOMER can post a job
     if (session['account'] == None or session['account']['accounttype'] != "CUSTOMER"):
         return render_template('error.html')
-    return render_template('jobpost.html')
+
+    allSkills = Skill.validSkills
+    return render_template('jobpost.html', allSkills=allSkills)
 
 #Define route for login
 @app.route('/jobPostAuth', methods=['GET', 'POST'])
@@ -339,6 +342,32 @@ def backgroundCheckAuth():
         Skill.applySkill(conn, email, skill)
 
     return redirect(url_for('homeWorker'))
+
+#Define route for login
+@app.route('/cancelJobAuth', methods=['GET', 'POST'])
+def cancelJobAuth():
+    #redirect to user's home
+    if not session.get('account'):
+        return redirect(url_for('index'))
+
+    jobid = request.form['jobid']
+
+    Job.cancelJob(conn, jobid)
+
+    return redirect(url_for('home'))
+
+@app.route('/searchJobAuth', methods=['GET', 'POST'])
+def searchJobAuth():
+    #redirect to user's home
+    if not session.get('account'):
+        return redirect(url_for('index'))
+
+    jobType = request.form['jobType']
+    jobState = request.form['jobState']
+
+    jobs = Job.getJobSearchResult(conn, jobType, jobState)
+    approvedSkills = Skill.getApprovedSkills(conn, email)
+    return render_template('jobboard.html', jobs=jobs,approvedSkills=approvedSkills)
 
 app.secret_key = 'ODDJOB'
 
