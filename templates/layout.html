@@ -11,20 +11,21 @@
     {% elif session['account']['accounttype'] == 'WORKER' %}
        <link rel="stylesheet" href='/static/workerStyle.css' />
     {% endif %}
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="/static/oddjob.png"/>
 </head>
 
  <body>
         <div id="nav-wrap">
             <div class="nav">
                 {% if not session.get('account') and type =='CUSTOMER' %}
-                    <a href="/" >HOME</a>
+                    <a href="/" ><i class="fas fa-home"></i>OddJob</a>
                 {% elif not session.get('account') and type =='WORKER' %}
-                    <a href="/worker" >HOME</a>
+                    <a href="/worker" ><i class="fas fa-home"></i>OddJob</a>
                  {% elif session['account']['accounttype'] == 'CUSTOMER' %}
-                    <a href="/" >HOME</a>
+                    <a href="/" >OddJob<i class="fas fa-home"></i></a>
                 {% elif session['account']['accounttype'] == 'WORKER' %}
-                    <a href="/worker" >HOME</a>
+                    <a href="/worker" ><i class="fas fa-home"></i>OddJob</a>
                 {% endif %}
                 <div class="nav-right">
                     {% if not session.get('account') and type =='CUSTOMER' %}
@@ -73,7 +74,12 @@
         </div>
 
           <div id="footer-wrap">
-            Contact Us At support@oddjob.com
+            <div class="contact-info">
+            <a href="https://facebook.com/" title="Twitter" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:oddjobsupport@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy 2019 OddJob</p>
         </div>
        
 </html>

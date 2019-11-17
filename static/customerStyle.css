@@ -124,3 +124,15 @@ button:hover {
 #footer-wrap {
   padding: 50px;
 }
+
+.contact-info {
+  font-size: 40px;
+}
+.contact-info a {
+  color: blue;
+  display: inline-block;
+}
+
+.contact-info a:hover {
+  color: black;
+}
