@@ -7,11 +7,32 @@ body {
   background-color: #c6ecd9;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x:auto;
+}
+
+
 table, th, td {
     border: 1px solid black;
 }
 
+th {
+  text-align: left;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
 
+td {
+  vertical-align: bottom;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+
+tr:nth-child(even) {background-color: #f2f2f2;}
 
 form {
   border: 3px solid #f1f1f1;
@@ -115,8 +136,6 @@ button:hover {
 
 #content-wrap {
   overflow: hidden;
-  padding-left: 50px;
-  padding-right: 50px;
   padding-bottom: 30px;
   background-color: white;
 }
@@ -135,4 +154,8 @@ button:hover {
 
 .contact-info a:hover {
   color: black;
+}
+
+.image {
+  width:100%;
 }

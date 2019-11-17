@@ -4,6 +4,7 @@
 {% block content %} 
 
     		<fieldset>
+    			<legend><h2>Worker Profile</h2></legend>
 			<p>Name: {{worker['firstname']}} {{worker['lastname']}}</p>
 			<p>Motto: {{worker['motto']}}</p>
 			<p>Job Performed: {{ total }}</p>
@@ -13,7 +14,7 @@
 
 		{% for line in trans %}
 		<fieldset>
-		<legend>{{line.jobname}} ({{line.jobtype}})</legend>
+		<legend><h2>{{line.jobname}} ({{line.jobtype}})</h2></legend>
 		<p>Job Detail: {{line.jobdescription}}</p>
 		<p>Rating : {{line.rating}}</p> 
 	    <p>Comment: {{line.comment}}</p>
