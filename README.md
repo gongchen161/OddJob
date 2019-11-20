@@ -45,4 +45,6 @@
 
 ### Changes:
 * Instead of workers and customers rating each other, now only customers can rate workers
+    * This was done to allow new customers without ratings to still have jobs fulfilled
 * Customers now request jobs which workers then bid on, rather than a having a worker post a job
+    * This was done to ensure specific customer needs would be met
