@@ -82,7 +82,6 @@
                 <th>Amount</th>
                 <th>Note</th>
                 <th>Time</th>
-                <th>Rating</th>
                 {% for line in completedJobs %}
                     <tr>
                         <td><a href="/job/{{line.jobid}}">{{line.jobname}}</a></td>
@@ -93,7 +92,6 @@
                          <td>{{line.amount}}</td>
                          <td>{{line.note}}</td>
                         <td>{{line.transactiontime}}</td>
-                        <td>{{line.rating}} : {{line.comment}}</td>
                     </tr>
                 {% endfor %}
             </table>

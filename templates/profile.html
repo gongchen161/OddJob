@@ -8,10 +8,11 @@
 		{% endif %}
 
 		<fieldset>
-		<legend><h2>Basic Info</h2></legend>
+		<legend><h2 style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bold; line-height: 20px; color: black;">Basic Info</h2></legend>
+		<font size="3" face="Helvetica Neue">
 		<form action="/updateProfileAuth" method="POST">
-			<p>Email: {{session['account']['email']}}</p>
-			<p>Account Type: {{session['account']['accounttype']}}</p>
+			<p style="font-weight: bold;">Email: {{session['account']['email']}}</p>
+			<p style="font-weight: bold;"">Account Type: {{session['account']['accounttype']}}</p>
 			First name: <input type="text" name="firstName" value="{{session['account']['firstname']}}"><br>
 			Last name: <input type="text" name="lastName" value="{{session['account']['lastname']}}"><br>
 			Motto: <input type="text" name="motto" value="{{session['account']['motto']}}"><br>			
@@ -22,6 +23,7 @@
 		<fieldset>
 		<legend><h2>My Addresses</h2></legend>
 		{% if addresses %}
+			<<font size="3" face="Helvetica Neue">
             <table>
             	<th>Name</th>
                 <th>Address</th>
