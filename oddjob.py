@@ -106,7 +106,13 @@ def register(type):
 	#redirect to user's home
     if (session.get('account')):
         return redirect(url_for('index'))
-    return render_template('register.html', type=type)
+
+    type2='OddJob Customer'
+
+    if type=='WORKER':
+        type2='OddJob Worker'
+
+    return render_template('register.html', type=type, type2=type2)
 
 
 #Define route for login
@@ -115,7 +121,12 @@ def login(type):
 	#redirect to user's home
     if (session.get('account')):
         return redirect(url_for('home'))
-    return render_template('login.html', type=type)
+    
+    type2='OddJob Customer'
+
+    if type=='WORKER':
+        type2='OddJob Worker'
+    return render_template('login.html', type=type, type2=type2)
 
 
 #Authenticates the register
