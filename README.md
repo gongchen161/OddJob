@@ -36,6 +36,13 @@
 * Workers must have their skill set verified by admin in order to accept jobs
     * Admin can approve skills by going to localhost:5000/admin
 
+### Test User Logins:
+* Customer
+    * U: dp2387@nyu.edu		P: oddjobdev
+* Worker
+    * U: rob.boss@gmail.com	P: happyaccident
+    * U: jazz.hands@gmail.com	P: kindofblue
+
 ### Changes:
 * Instead of workers and customers rating each other, now only customers can rate workers
 * Customers now request jobs which workers then bid on, rather than a having a worker post a job

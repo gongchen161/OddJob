@@ -155,8 +155,8 @@ class Job:
         #cursor used to send queries
         cursor = conn.cursor()
         #executes query
-        query = 'SELECT * FROM Job WHERE jobType=%s AND jobState=%s'
-        cursor.execute(query, (jobType, jobState))
+        query = 'SELECT * FROM Job WHERE jobType=%s AND jobState=%s AND jobstatus=%s'
+        cursor.execute(query, (jobType, jobState, 'POSTED'))
         #stores the results in a variable
         data = cursor.fetchall()
         #use fetchall() if you are expecting more than 1 data row
