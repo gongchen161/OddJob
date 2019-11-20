@@ -131,7 +131,7 @@ button:hover {
 .empty-wrap {
   display:block
   min-height:20;
-  background-color: white;
+  background-color: #c6ecd9;
 }
 
 #content-wrap {
