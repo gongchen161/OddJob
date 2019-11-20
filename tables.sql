@@ -9,6 +9,16 @@ CREATE TABLE IF NOT EXISTS Account(
     PRIMARY KEY (email)
 );
 
+CREATE TABLE IF NOT EXISTS Address(
+    email VARCHAR(50),  
+    alias VARCHAR(50),    
+    address VARCHAR(200),
+    city VARCHAR(20),
+    state VARCHAR(20),
+    PRIMARY KEY (email, alias),
+    FOREIGN KEY (email) REFERENCES Account(email)
+);
+
 
 CREATE TABLE IF NOT EXISTS Job(
     jobid INT AUTO_INCREMENT,
@@ -20,8 +30,9 @@ CREATE TABLE IF NOT EXISTS Job(
     jobdescription VARCHAR(256),
     jobstatus VARCHAR(20),
     jobtime Timestamp, 
+    jobaddress VARCHAR(50),    
     PRIMARY KEY (jobid),
-    FOREIGN KEY (requestoremail) REFERENCES Account(email)
+    FOREIGN KEY (requestoremail) REFERENCES Account(email),
 );
 
 
@@ -68,3 +79,4 @@ CREATE TABLE IF NOT EXISTS Message(
     FOREIGN KEY (email) REFERENCES Account(email),
     FOREIGN KEY (jobid) REFERENCES Job(jobid)
 );
+

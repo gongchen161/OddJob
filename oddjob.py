@@ -6,6 +6,7 @@ from job import Job
 from transaction import Transaction
 from skill import Skill
 from message import Message
+from address import Address
 #Initialize the app from Flask
 app = Flask(__name__)
 
@@ -78,7 +79,10 @@ def profile():
      #Only WORKER can access this page
     if (session['account'] == None):
         return render_template('error.html')
-    return render_template('profile.html')
+
+    email = session['account']['email']
+    addresses = Address.getAllAddress(conn, email)
+    return render_template('profile.html', addresses = addresses)
 
 
 #Define a route to hello function
@@ -305,8 +309,8 @@ def viewJob(id):
         trans = Job.getAllTransactions(conn, id)
         rate = Job.getRating(conn, id)
         messages = Message.getAllMessages(conn, id)
-
-        return render_template('job.html', job=job, trans=trans, messages=messages, rate=rate)
+        validAddress = Address.getAllAddressInCityState(conn, job['requestoremail'], job['jobcity'], job['jobstate'] )
+        return render_template('job.html', job=job, trans=trans, messages=messages, rate=rate,validAddress=validAddress)
 
     return render_template('error.html')
 
@@ -431,6 +435,41 @@ def changePasswordAuth():
 
     return redirect(url_for('profile'))
 
+
+@app.route('/addAddressAuth', methods=['GET', 'POST'])
+def addAddressAuth():
+
+    email = session['account']['email']
+    alias = request.form['alias']
+    address = request.form['address']
+    city = request.form['city']
+    state = request.form['state']
+    
+    Address.addAddress(conn, email, alias, address, city, state)
+
+    return redirect(url_for('profile'))
+
+@app.route('/editAddressAuth', methods=['GET', 'POST'])
+def editAddressAuth():
+
+    email = session['account']['email']
+    alias = request.form['alias']
+    address = request.form['address']
+    
+    Address.editAddress(conn, email, alias, address)
+
+    return redirect(url_for('profile'))
+
+@app.route('/confirmJobAddressAuth', methods=['GET', 'POST'])
+def confirmJobAddressAuth():
+
+    email = session['account']['email']
+    alias = request.form['alias']
+    jobid = request.form['jobid']
+    
+    Job.updateJobAddress(conn, alias, jobid)
+
+    return redirect(url_for('viewJob', id=jobid))
 
 app.secret_key = 'ODDJOB'
 

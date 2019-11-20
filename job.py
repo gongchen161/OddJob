@@ -189,3 +189,13 @@ class Job:
 
         cursor.close()
         return data
+
+    @staticmethod
+    def updateJobAddress(conn, alias, id):
+        #cursor used to send queries
+        cursor = conn.cursor()
+        #executes query
+        query = 'UPDATE Job SET jobaddress = %s WHERE jobid = %s'
+        cursor.execute(query, (alias, id))
+
+        cursor.close()
