@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS Job(
     jobtime Timestamp, 
     jobaddress VARCHAR(50),    
     PRIMARY KEY (jobid),
-    FOREIGN KEY (requestoremail) REFERENCES Account(email),
+    FOREIGN KEY (requestoremail) REFERENCES Account(email)
 );
 
 
