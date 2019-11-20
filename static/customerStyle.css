@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #71F7B0;
+  background-color: #67c48a;
 }
 
 table {
@@ -131,13 +131,13 @@ button:hover {
 .empty-wrap {
   display:block
   min-height:20;
-  background-color: #71F7B0;
+  background-color: #67c48a;
 }
 
 #content-wrap {
   overflow: hidden;
   padding-bottom: 30px;
-  background-color: #71F7B0;
+  background-color: #67c48a;
 }
 
 #footer-wrap {
