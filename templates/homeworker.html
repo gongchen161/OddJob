@@ -50,11 +50,10 @@
                 <th>Time</th>
                 <th>Amount</th>
                 <th>Note</th>
-                <th>View</th>
 
                 {% for line in confirmedJobs %}
                     <tr>
-                        <td>{{line.jobname}}</td>
+                        <td><a href="/job/{{line.jobid}}">{{line.jobname}}</a></td>
                         <td>{{line.jobtype}}</td>
                         <td>{{line.jobcity}}</td>
                         <td>{{line.jobstate}}</td>
@@ -62,7 +61,6 @@
                          <td>{{line.transactiontime}}</td>
                          <td>{{line.amount}}</td>
                          <td>{{line.note}}</td>
-                        <td><a href="/job/{{line.jobid}}">view</a></td>
                     </tr>
                 {% endfor %}
             </table>
@@ -84,10 +82,9 @@
                 <th>Time</th>
                 <th>Amount</th>
                 <th>Rating</th>
-                <td>View</td>
                 {% for line in completedJobs %}
                     <tr>
-                        <td>{{line.jobname}}</td>
+                        <td><a href="/job/{{line.jobid}}">{{line.jobname}}</a></td>
                         <td>{{line.jobtype}}</td>
                         <td>{{line.jobcity}}</td>
                         <td>{{line.jobstate}}</td>
@@ -95,7 +92,6 @@
                         <td>{{line.transactiontime}}</td>
                          <td>{{line.amount}}</td>
                         <td>{{line.rating}} : {{line.comment}}</td>
-                        <td><a href="/job/{{line.jobid}}">view</a></td>
                     </tr>
                 {% endfor %}
             </table>
