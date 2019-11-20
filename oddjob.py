@@ -369,7 +369,7 @@ def backgroundCheckAuth():
     for skill in skills:
         Skill.applySkill(conn, email, skill)
 
-    return redirect(url_for('homeWorker'))
+    return redirect(url_for('backgroundCheck'))
 
 #Define route for login
 @app.route('/cancelJobAuth', methods=['GET', 'POST'])
@@ -400,7 +400,7 @@ def searchJobAuth():
     jobType = request.form['jobType']
     jobState = request.form['jobState']
 
-    jobs = Job.getJobSearchResult(conn, jobType, jobState)
+    jobs = Job.getJobSearchResult(conn, jobType, jobState, email)
     return render_template('jobboard.html', jobs=jobs,approvedSkills=approvedSkills)
 
 @app.route('/addMessageAuth', methods=['GET', 'POST'])

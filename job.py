@@ -43,7 +43,7 @@ class Job:
 
         cursor = conn.cursor()
         # need to join Transaction to get more info about the worker
-        query = 'SELECT * FROM Job JOIN Transaction ON (Job.jobid = Transaction.jobid) WHERE requestoremail = %s AND jobstatus= %s AND status = %s'
+        query = 'SELECT * FROM Job JOIN Transaction ON (Job.jobid = Transaction.jobid) JOIN Account ON(Transaction.acceptoremail=Account.email) WHERE requestoremail = %s AND jobstatus= %s AND status = %s'
         cursor.execute(query, (email, 'CONFIRMED', 'CONFIRMED'))
         data = cursor.fetchall()
 
@@ -56,7 +56,7 @@ class Job:
 
         cursor = conn.cursor()
         # need to join Transaction and rating to get more info 
-        query = 'SELECT * FROM Job JOIN Transaction ON (Job.jobid = Transaction.jobid) JOIN Rate ON (Job.jobid = Rate.jobid) WHERE Job.requestoremail = %s AND jobstatus= %s AND status = %s'
+        query = 'SELECT * FROM Job JOIN Transaction ON (Job.jobid = Transaction.jobid) JOIN Account ON(Transaction.acceptoremail=Account.email) JOIN Rate ON (Job.jobid = Rate.jobid) WHERE Job.requestoremail = %s AND jobstatus= %s AND status = %s'
         cursor.execute(query, (email, 'COMPLETED', 'COMPLETED'))
 
         data = cursor.fetchall()
@@ -151,12 +151,12 @@ class Job:
         return data
 
     @staticmethod
-    def getJobSearchResult(conn, jobType, jobState):
+    def getJobSearchResult(conn, jobType, jobState, email):
         #cursor used to send queries
         cursor = conn.cursor()
         #executes query
-        query = 'SELECT * FROM Job WHERE jobType=%s AND jobState=%s AND jobstatus=%s'
-        cursor.execute(query, (jobType, jobState, 'POSTED'))
+        query = 'SELECT * FROM Job JOIN Account ON (Job.requestoremail=Account.email) WHERE jobType=%s AND jobState=%s AND jobstatus=%s AND jobid NOT IN (SELECT jobid FROM Transaction WHERE Transaction.acceptoremail=%s)'
+        cursor.execute(query, (jobType, jobState, 'POSTED', email))
         #stores the results in a variable
         data = cursor.fetchall()
         #use fetchall() if you are expecting more than 1 data row

@@ -11,12 +11,12 @@
             <table>
                 <th>Job Name</th>
                 <th>Job Type</th>
-                <th>job City</th>
-                <th>job State</th>
-                <th>job Description</th>
-                <th>amount</th>
-                <th>note</th>
-                <th>time</th>
+                <th>Job City</th>
+                <th>Job State</th>
+                <th>Job Description</th>
+                <th>Amount</th>
+                <th>Note</th>
+                <th>Time</th>
 
                 {% for line in acceptedJobs %}
                     <tr>
@@ -44,13 +44,13 @@
             <table>
                 <th>Job Name</th>
                 <th>Job Type</th>
-                <th>job City</th>
-                <th>job State</th>
-                <th>job Description</th>
-                <th>amount</th>
-                <th>note</th>
-                <th>time</th>
-                <th>view</th>
+                <th>Job City</th>
+                <th>Job State</th>
+                <th>Job Description</th>
+                <th>Time</th>
+                <th>Amount</th>
+                <th>Note</th>
+                <th>View</th>
 
                 {% for line in confirmedJobs %}
                     <tr>
@@ -59,9 +59,9 @@
                         <td>{{line.jobcity}}</td>
                         <td>{{line.jobstate}}</td>
                         <td>{{line.jobdescription}}</td>
+                         <td>{{line.transactiontime}}</td>
                          <td>{{line.amount}}</td>
                          <td>{{line.note}}</td>
-                        <td>{{line.transactiontime}}</td>
                         <td><a href="/job/{{line.jobid}}">view</a></td>
                     </tr>
                 {% endfor %}
@@ -78,13 +78,13 @@
              <table>
                 <th>Job Name</th>
                 <th>Job Type</th>
-                <th>job City</th>
-                <th>job State</th>
-                <th>job Description</th>
-                <th>amount</th>
-                <th>time</th>
-                <th>rating</th>
-                <td>Action</td>
+                <th>Job City</th>
+                <th>Job State</th>
+                <th>Job Description</th>
+                <th>Time</th>
+                <th>Amount</th>
+                <th>Rating</th>
+                <td>View</td>
                 {% for line in completedJobs %}
                     <tr>
                         <td>{{line.jobname}}</td>
@@ -92,8 +92,8 @@
                         <td>{{line.jobcity}}</td>
                         <td>{{line.jobstate}}</td>
                         <td>{{line.jobdescription}}</td>
-                         <td>{{line.amount}}</td>
                         <td>{{line.transactiontime}}</td>
+                         <td>{{line.amount}}</td>
                         <td>{{line.rating}} : {{line.comment}}</td>
                         <td><a href="/job/{{line.jobid}}">view</a></td>
                     </tr>

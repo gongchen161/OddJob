@@ -8,12 +8,12 @@
 
             <p>Job Name : {{ job.jobname }}</p>
             <p>Job Type : {{job.jobtype}}</p>
-            {% if job.jobstatus == 'CONFIRMED' %}
+            {% if job.jobstatus != 'POSTED'%}
                 {% if job.jobaddress %}
                 <p>
                     Job Address : {{ job.jobaddress }}
                 </p>
-                {% else %}
+                {% elif session['account']['accounttype']=='CUSTOMER' %}
                     {% if validAddress %}
                         <form action="/confirmJobAddressAuth" method="POST">
                            <select name="alias" id="jobAddressList" style="width:85%;display:inline-block; float:left padding:0; margin:0"/>
@@ -40,7 +40,6 @@
             {% if trans %}
             <table>
                 <tr>
-                <th>Acceptor Email</th>
                 <th>Acceptor Name</th>
                 <th>Amount Offered</th>
                 <th>Note</th>
@@ -50,8 +49,7 @@
 
                 {% for line in trans %}
                     <tr>
-                        <td><a href="/viewworker/{{line.acceptoremail}}">{{line.acceptoremail}}</a></td>
-                         <td>{{line.firstname}} {{line.lastname}}</td>
+                         <td><a href="/viewworker/{{line.acceptoremail}}">{{line.firstname}} {{line.lastname}}</a></td>
                         <td>{{line.amount}}</td>
                         <td>{{line.note}}</td>
                         <td>{{line.transactiontime}}</td>

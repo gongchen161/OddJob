@@ -89,7 +89,7 @@ class Transaction:
         #cursor used to send queries
         cursor = conn.cursor()
     
-        ins = 'SELECT * FROM Transaction JOIN Job USING (jobid) WHERE jobid = %s AND status = %s'
+        ins = 'SELECT * FROM Transaction JOIN Job USING (jobid) JOIN Account ON (Transaction.acceptoremail=Account.email) WHERE jobid = %s AND status = %s'
         cursor.execute(ins, (jobId, 'CONFIRMED'))
         conn.commit()
 
