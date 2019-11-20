@@ -28,3 +28,14 @@
             service mysql restart
             ```
 * Go to localhost:5000 to access the application
+
+### Usage:
+* Web App opens to Customer home screen, where a user can register, login, or switch to the Worker page.
+* After a customer registers and logs in, they can view their pending and past jobs, post a job, and edit their account.
+* After a worker registers and logs in, they can view their job history, search and accept work in a specific area, and edit their account.
+* Workers must have their skill set verified by admin in order to accept jobs
+    * Admin can approve skills by going to localhost:5000/admin
+
+### Changes:
+* Instead of workers and customers rating each other, now only customers can rate workers
+* Customers now request jobs which workers then bid on, rather than a having a worker post a job
