@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #7FDDF2;
+  background-color: #D5F1F8;
 }
 
 table {
@@ -70,7 +70,7 @@ button:hover {
 
 #nav-wrap {
   overflow: hidden;
-  background-color: #4D86F2;
+  background-color: #7FDEF3;
   position: fixed;
   height: 40px;
   width: 100%;
@@ -92,7 +92,7 @@ button:hover {
 }
 
 #nav-wrap a:hover {
-  background-color: #4D86F2;
+  background-color: #8AE8F9;
   color: white;
 }
 
@@ -131,16 +131,18 @@ button:hover {
 .empty-wrap {
   display:block
   min-height:20;
-  background-color: #7FDDF2;
+  background-color: #D5F1F8;
 }
 
 #content-wrap {
   overflow: hidden;
-  background-color: #7FDDF2;
+  padding-bottom: 30px;
+  background-color: #D5F1F8;
 }
 
 #footer-wrap {
   padding: 50px;
+  background-color: #7FDEF3;
 }
 
 .contact-info {

@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #67c48a;
+  background-color: #E0F2DF;
 }
 
 table {
@@ -64,13 +64,13 @@ button {
 /* Add a hover effect for buttons */
 button:hover {
   opacity: 0.8;
-  background-color: #4B84DA;
+  background-color: #DADADA;
 }
 
 
 #nav-wrap {
   overflow: hidden;
-  background-color: #c6ecd9;
+  background-color: #75CA95;
   position: fixed;
   height: 40px;
   width: 100%;
@@ -92,7 +92,7 @@ button:hover {
 }
 
 #nav-wrap a:hover {
-  background-color: #53c68c;
+  background-color: #9DE898;
   color: white;
 }
 
@@ -131,17 +131,18 @@ button:hover {
 .empty-wrap {
   display:block
   min-height:20;
-  background-color: #67c48a;
+  background-color: #E0F2DF;
 }
 
 #content-wrap {
   overflow: hidden;
   padding-bottom: 30px;
-  background-color: #67c48a;
+  background-color: #E0F2DF;
 }
 
 #footer-wrap {
   padding: 50px;
+  background-color: #75CA95;
 }
 
 .contact-info {
