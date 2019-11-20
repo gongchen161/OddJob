@@ -321,7 +321,8 @@ def viewJob(id):
         rate = Job.getRating(conn, id)
         messages = Message.getAllMessages(conn, id)
         validAddress = Address.getAllAddressInCityState(conn, job['requestoremail'], job['jobcity'], job['jobstate'] )
-        return render_template('job.html', job=job, trans=trans, messages=messages, rate=rate,validAddress=validAddress)
+        acc = Job.getAcceptedTransaction(conn, id)
+        return render_template('job.html', job=job, trans=trans, messages=messages, rate=rate,validAddress=validAddress, acc=acc)
 
     return render_template('error.html')
 

@@ -46,8 +46,6 @@
                 <th>Job State</th>
                 <th>Job Description</th>
                 <th>Time</th>
-                <th>Amount</th>
-                <th>Worker Name</th>
                 {% for line in confirmedJobs %}
                     <tr>
                         <td><a href="/job/{{line.jobid}}">{{line.jobname}}</a></td>
@@ -56,8 +54,6 @@
                         <td>{{line.jobstate}}</td>
                         <td>{{line.jobdescription}}</td>
                         <td>{{line.jobtime}}</td>
-                        <td>{{line.amount}}</td>
-                        <td><a href="/viewworker/{{line.acceptoremail}}">{{line.firstname}} {{line.lastname}}</a></td>
                     </tr>
                 {% endfor %}
             </table>
@@ -76,9 +72,7 @@
                 <th>Job City</th>
                 <th>Job State</th>
                 <th>Job Description</th>
-                <th>Worker Name</th>
-                <th>Job Time</th>
-                <th>Job Amount</th>
+                <th>Time</th>
                 {% for line in completedJobs %}
                    <tr>
                         <td><a href="/job/{{line.jobid}}">{{line.jobname}}</a></td>
@@ -86,9 +80,7 @@
                         <td>{{line.jobcity}}</td>
                         <td>{{line.jobstate}}</td>
                         <td>{{line.jobdescription}}</td>
-                        <td><a href="/viewworker/{{line.acceptoremail}}">{{line.firstname}} {{line.lastname}}</a></td>
                         <td>{{line.jobtime}}</td>
-                        <td>{{line.amount}}</td>
                     </tr>
                 {% endfor %}
             </table>

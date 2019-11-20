@@ -47,9 +47,9 @@
                 <th>Job City</th>
                 <th>Job State</th>
                 <th>Job Description</th>
-                <th>Time</th>
                 <th>Amount</th>
                 <th>Note</th>
+                <th>Time</th>
 
                 {% for line in confirmedJobs %}
                     <tr>
@@ -58,9 +58,9 @@
                         <td>{{line.jobcity}}</td>
                         <td>{{line.jobstate}}</td>
                         <td>{{line.jobdescription}}</td>
-                         <td>{{line.transactiontime}}</td>
-                         <td>{{line.amount}}</td>
+                        <td>{{line.amount}}</td>
                          <td>{{line.note}}</td>
+                         <td>{{line.transactiontime}}</td>
                     </tr>
                 {% endfor %}
             </table>
@@ -79,8 +79,9 @@
                 <th>Job City</th>
                 <th>Job State</th>
                 <th>Job Description</th>
-                <th>Time</th>
                 <th>Amount</th>
+                <th>Note</th>
+                <th>Time</th>
                 <th>Rating</th>
                 {% for line in completedJobs %}
                     <tr>
@@ -89,8 +90,9 @@
                         <td>{{line.jobcity}}</td>
                         <td>{{line.jobstate}}</td>
                         <td>{{line.jobdescription}}</td>
-                        <td>{{line.transactiontime}}</td>
                          <td>{{line.amount}}</td>
+                         <td>{{line.note}}</td>
+                        <td>{{line.transactiontime}}</td>
                         <td>{{line.rating}} : {{line.comment}}</td>
                     </tr>
                 {% endfor %}

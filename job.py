@@ -38,6 +38,21 @@ class Job:
 
         return data
 
+
+    @staticmethod
+    def getAcceptedTransaction(conn, jobid):
+
+        cursor = conn.cursor()
+
+        query = 'SELECT * FROM Transaction JOIN Account ON (Transaction.acceptoremail=account.email) WHERE jobid = %s AND (status= %s OR status=%s)'
+        cursor.execute(query, (jobid, 'CONFIRMED', 'COMPLETED'))
+
+        data = cursor.fetchone()
+
+        cursor.close()
+
+        return data
+
     @staticmethod
     def getConfirmedJobs(conn, email):
 

@@ -35,6 +35,25 @@
             <p>Request Time : {{job.jobtime}}</p>
             <p>Status : {{job.jobstatus}}</p>
 </fieldset>
+
+{% if job.jobstatus != 'POSTED' %}
+<fieldset>
+    <legend><h2>Transaction Info</h2></legend>
+    <p>Worker Name: <a href="/viewworker/{{acc.acceptoremail}}">{{ acc.firstname }} {{ acc.lastname }}</a></p>
+    <p>Amount: {{ acc.amount }} </p>
+    <p>Note: {{ acc.note }} </p>
+
+    {% if session['account']['accounttype']=='CUSTOMER' and job.jobstatus == 'CONFIRMED' %}
+                            
+    <form action="/payJobAuth" method="POST">
+        <input type="hidden" name='jobId' value={{job.jobid}} />
+        <input type="submit" value = Pay>
+    </form>
+    {% endif %}
+</fieldset>
+{% endif %}
+
+
 {% if job.jobstatus=='POSTED' %}
 <fieldset>
             {% if trans %}
@@ -103,12 +122,6 @@
      <form action="/completeJobAuth" method="POST">
         <input type="hidden" name='jobId' value={{job.jobid}} />
         <input type="submit" value = Complete>
-    </form>
-
-                            
-    <form action="/payJobAuth" method="POST">
-        <input type="hidden" name='jobId' value={{job.jobid}} />
-        <input type="submit" value = Pay>
     </form>
     {% endif %}
 
