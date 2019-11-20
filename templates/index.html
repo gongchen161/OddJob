@@ -4,12 +4,37 @@
 <img style="width:100%;" src="/static/banner.png" class="image" /> 
 <fieldset>
     <legend><h2>Services</h2></legend>
+
+<div style="width:100%;" align="center" class="banner">
+	<img class="slides" src="/static/img1.jpg">
+	<img class="slides" src="/static/img2.jpg">
+	<img class="slides" src="/static/img3.jpg">
+	<img class="slides" src="/static/img4.jpg">
+	<img class="slides" src="/static/img5.jpg">
+</div>
     <p>House Keeping</p>
     <p>Landscaping</p>
     <p>Home Improvement</p>
     <p>Baby Sitting</p>
     <p>Plumbing</p>
 </fieldset>
+
+<script>
+var myIndex=0;
+carousel();
+
+function carousel(){
+	var i;
+	var x = document.getElementsByClassName("slides");
+	for(i = 0; i < x.length; i++){
+		x[i].style.display = "none";
+	}
+	myIndex++;
+	if(myIndex > x.length) {myIndex=1}
+	x[myIndex-1].style.display = "block";
+	setTimeout(carousel, 3000);
+}
+</script>
 
 {% endblock %}
             
