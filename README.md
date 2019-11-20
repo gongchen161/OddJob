@@ -20,11 +20,11 @@
         <pymysql.err.InternalError: (1698, "Access denied for user 'root'@'localhost'")>
         * Error was fixed with the following commands:
             '''
-            > sudo mysql -u root
+            sudo mysql -u root
             mysql> USE mysql;
             mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='root';
             mysql> FLUSH PRIVILEGES;
             mysql> exit;
-            > service mysql restart
+            service mysql restart
             '''
 * Go to localhost:5000 to access the application
