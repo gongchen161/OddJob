@@ -1,6 +1,7 @@
 {% if applications %}
 	{% for line in applications %}
 	<fieldset>
+		<font size="2" face="Helvetica Neue">
 		<form action="/approveSkillAuth" method="POST">
 			<p>WORKER email: {{line.email}}</p>
 			<p>SKILL : {{line.skillname}}</p>
@@ -11,5 +12,6 @@
 	</fieldset>
 	{% endfor %}
 {% else %}
-	<h3>No Skill Application Found</h3>
+	<font size="4" face="Helvetica Neue">
+	<h3>No Applications Found</h3>
 {% endif %} 
