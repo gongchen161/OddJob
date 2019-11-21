@@ -1,5 +1,8 @@
 # OddJob
 
+## Repo
+https://github.com/gongchen161/OddJob
+
 ## Prerequisites
 * Python3
 * MySQL
