@@ -13,7 +13,8 @@ table {
   overflow-x:auto;
 }
 
-legend{font-family: Arial, Helvetica Neue, Helvetica, sans-serif; 
+legend {
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif; 
 	font-size: 18px; 
 	font-style: normal; 
 	font-variant: normal; 
