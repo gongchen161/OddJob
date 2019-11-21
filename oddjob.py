@@ -7,6 +7,7 @@ from transaction import Transaction
 from skill import Skill
 from message import Message
 from address import Address
+from support import Support
 #Initialize the app from Flask
 app = Flask(__name__)
 
@@ -25,7 +26,8 @@ conn = pymysql.connect(host='localhost',
 @app.route('/admin')
 def admin():
     applications = Skill.getPendingApplications(conn)
-    return render_template('admin.html', applications=applications)
+    messages = Support.getNewSupport(conn)
+    return render_template('admin.html', applications=applications,messages=messages)
 
 # CUSTOMER Index
 @app.route('/')
@@ -485,7 +487,31 @@ def confirmJobAddressAuth():
 
 @app.route('/support')
 def support():
-    return render_template('support.html')
+    email = session['account']['email']
+    oldMessages = Support.getMyMessages(conn, email)
+    return render_template('support.html', oldMessages=oldMessages)
+
+@app.route('/sendMessageAuth', methods=['GET', 'POST'])
+def sendMessageAuth():
+
+    email = request.form['email']
+    title = request.form['title']
+    message = request.form['message']
+    
+    Support.addSupport(conn, email, title, message)
+
+    return redirect(url_for('support'))
+
+
+@app.route('/replyMessageAuth', methods=['GET', 'POST'])
+def replyMessageAuth():
+
+    id = request.form['id']
+    reply = request.form['reply']
+    
+    Support.replySupport(conn, id, reply)
+
+    return redirect(url_for('admin'))
 
 app.secret_key = 'ODDJOB'
 

@@ -80,3 +80,15 @@ CREATE TABLE IF NOT EXISTS Message(
     FOREIGN KEY (jobid) REFERENCES Job(jobid)
 );
 
+
+CREATE TABLE IF NOT EXISTS Support(
+    supportid INT AUTO_INCREMENT,
+    email VARCHAR(50), 
+    title VARCHAR(50),
+    message VARCHAR(200),
+    reply VARCHAR(200),
+    messagetime Timestamp,
+    status VARCHAR(20),
+    PRIMARY KEY (supportid)
+);
+

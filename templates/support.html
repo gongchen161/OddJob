@@ -6,7 +6,8 @@
     <fieldset>
         <legend><h2>Send A Message</h2></legend>
         <form action="/sendMessageAuth" method="POST">
-            
+            Preferred Email
+            <input type="text" name = "email" value="{{session['account']['email']}}" require readonly> </br>
             Title:
             <input type="textarea" name = "title" placeholder="Title" required/> </br>
             Message:<br>
@@ -15,4 +16,16 @@
             <button type="submit">Send</form>
         </form>
     </fieldset>
+
+
+    {% if oldMessages %}
+      {% for line in oldMessages %}
+         <fieldset>
+            <legend><h2>{{line.title}}</h2></legend>
+            <p>Message: {{line.message}}</p>
+            <p>Reply: {{line.reply}}</p>
+            <p>Time: {{line.messagetime}}</p>
+        </fieldset>
+      {% endfor %}
+    {% endif %}
 {% endblock %}
