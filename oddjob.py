@@ -483,6 +483,10 @@ def confirmJobAddressAuth():
 
     return redirect(url_for('viewJob', id=jobid))
 
+@app.route('/support')
+def support():
+    return render_template('support.html')
+
 app.secret_key = 'ODDJOB'
 
 if __name__ == "__main__":
