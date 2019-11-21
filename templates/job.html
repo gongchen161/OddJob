@@ -83,7 +83,7 @@
                 {% endfor %}
             </table>
             {% else %}
-            <h2 style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bold; line-height: 20px; color: black;">No one has offer the job</h2>
+            <h2 style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bold; line-height: 20px; color: black;">No one has put in an offer for the job</h2>
             {% endif %}
         <form action="/cancelJobAuth" method="POST">
             <input type="hidden" name='jobid' value='{{job.jobid}}' />
