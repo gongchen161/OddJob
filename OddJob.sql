@@ -39,8 +39,35 @@ CREATE TABLE `Account` (
 
 LOCK TABLES `Account` WRITE;
 /*!40000 ALTER TABLE `Account` DISABLE KEYS */;
-INSERT INTO `Account` VALUES ('dp2387@nyu.edu','cfa2a433da95914e214d2e5cb4ad49e8b5efedb7ddb5011407d146afed356a4b','Daniel','Palacios','CUSTOMER','It\'s not a bug, it\'s a feature.'),('jazz.hands@gmail.com','dbd0f5ab02c8c5ca35885057524126d3e06c1303440335e4632aef385c18d83e','Miles','Davis','WORKER',''),('rob.boss@gmail.com','48b22e3a0ca4a4cddf5809ba18c200a2a3019d35a5fa76137cd7126a1075e852','Bob','Ross','WORKER','');
+INSERT INTO `Account` VALUES ('dp2387@nyu.edu','cfa2a433da95914e214d2e5cb4ad49e8b5efedb7ddb5011407d146afed356a4b','Daniel','Palacios','CUSTOMER',''),('jazz.hands@gmail.com','dbd0f5ab02c8c5ca35885057524126d3e06c1303440335e4632aef385c18d83e','Miles','Davis','WORKER',''),('rob.boss@gmail.com','48b22e3a0ca4a4cddf5809ba18c200a2a3019d35a5fa76137cd7126a1075e852','Bob','Ross','WORKER',''),('scarface@gmail.com','9231979ce48ffb7791ca01e0d5e23f894c369ce4e2169a7c7b8fe90b1ef19502','Tony','Montana','CUSTOMER','');
 /*!40000 ALTER TABLE `Account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Address`
+--
+
+DROP TABLE IF EXISTS `Address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Address` (
+  `email` varchar(50) NOT NULL,
+  `alias` varchar(50) NOT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `city` varchar(20) DEFAULT NULL,
+  `state` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`email`,`alias`),
+  CONSTRAINT `Address_ibfk_1` FOREIGN KEY (`email`) REFERENCES `Account` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Address`
+--
+
+LOCK TABLES `Address` WRITE;
+/*!40000 ALTER TABLE `Address` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Address` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -60,10 +87,11 @@ CREATE TABLE `Job` (
   `jobdescription` varchar(256) DEFAULT NULL,
   `jobstatus` varchar(20) DEFAULT NULL,
   `jobtime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `jobaddress` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`jobid`),
   KEY `requestoremail` (`requestoremail`),
   CONSTRAINT `Job_ibfk_1` FOREIGN KEY (`requestoremail`) REFERENCES `Account` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +100,7 @@ CREATE TABLE `Job` (
 
 LOCK TABLES `Job` WRITE;
 /*!40000 ALTER TABLE `Job` DISABLE KEYS */;
-INSERT INTO `Job` VALUES (1,'dp2387@nyu.edu','House Cleaner','House keeping','New York City','NY','Small apartment needs cleaning','COMPLETED','2019-11-20 00:28:35'),(2,'dp2387@nyu.edu','Dog walker','Baby Sitting','New York City','NY','Need someone to baby sit my dog','POSTED','2019-11-20 00:08:52');
+INSERT INTO `Job` VALUES (1,'scarface@gmail.com','House Cleaner','House keeping','Miami','FL','Need heavy duty cleaning','COMPLETED','2019-11-21 02:11:00',NULL),(2,'dp2387@nyu.edu','Dog Walker','Baby Sitting','New York City','NY','Need someone to baby sit my dog','POSTED','2019-11-21 01:50:33',NULL),(3,'dp2387@nyu.edu','House painting','Home Improvement','New York City','NY','Need painter to paint my house','CONFIRMED','2019-11-21 02:09:58',NULL);
 /*!40000 ALTER TABLE `Job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +122,7 @@ CREATE TABLE `Message` (
   KEY `jobid` (`jobid`),
   CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`email`) REFERENCES `Account` (`email`),
   CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`jobid`) REFERENCES `Job` (`jobid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,6 +131,7 @@ CREATE TABLE `Message` (
 
 LOCK TABLES `Message` WRITE;
 /*!40000 ALTER TABLE `Message` DISABLE KEYS */;
+INSERT INTO `Message` VALUES (1,3,'rob.boss@gmail.com','2019-11-21 02:12:57','Would you like a happy tree?');
 /*!40000 ALTER TABLE `Message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +161,7 @@ CREATE TABLE `Rate` (
 
 LOCK TABLES `Rate` WRITE;
 /*!40000 ALTER TABLE `Rate` DISABLE KEYS */;
-INSERT INTO `Rate` VALUES (1,'dp2387@nyu.edu',5,'2019-11-20 00:29:12','Cool guy, painted a nice mountain.');
+INSERT INTO `Rate` VALUES (1,'scarface@gmail.com',4,'2019-11-21 02:11:53','He played very nice music');
 /*!40000 ALTER TABLE `Rate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,8 +187,37 @@ CREATE TABLE `Skill` (
 
 LOCK TABLES `Skill` WRITE;
 /*!40000 ALTER TABLE `Skill` DISABLE KEYS */;
-INSERT INTO `Skill` VALUES ('jazz.hands@gmail.com','House keeping','APPROVED'),('rob.boss@gmail.com','Baby Sitting','APPROVED'),('rob.boss@gmail.com','Home Improvement','APPROVED'),('rob.boss@gmail.com','House keeping','APPROVED'),('rob.boss@gmail.com','Landscaping','APPROVED'),('rob.boss@gmail.com','Plumbing','APPROVED');
+INSERT INTO `Skill` VALUES ('jazz.hands@gmail.com','Home Improvement','APPROVED'),('jazz.hands@gmail.com','House keeping','APPROVED'),('jazz.hands@gmail.com','Plumbing','APPROVED'),('rob.boss@gmail.com','Baby Sitting','APPROVED'),('rob.boss@gmail.com','Home Improvement','APPROVED'),('rob.boss@gmail.com','House keeping','APPROVED'),('rob.boss@gmail.com','Landscaping','APPROVED');
 /*!40000 ALTER TABLE `Skill` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Support`
+--
+
+DROP TABLE IF EXISTS `Support`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Support` (
+  `supportid` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  `reply` varchar(200) DEFAULT NULL,
+  `messagetime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`supportid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Support`
+--
+
+LOCK TABLES `Support` WRITE;
+/*!40000 ALTER TABLE `Support` DISABLE KEYS */;
+INSERT INTO `Support` VALUES (1,'jazz.hands@gmail.com','Customer was a criminal','There was a lot to clean at Tony Montana\'s house',NULL,'2019-11-21 01:56:04','NEW');
+/*!40000 ALTER TABLE `Support` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -189,7 +247,7 @@ CREATE TABLE `Transaction` (
 
 LOCK TABLES `Transaction` WRITE;
 /*!40000 ALTER TABLE `Transaction` DISABLE KEYS */;
-INSERT INTO `Transaction` VALUES (1,'jazz.hands@gmail.com','REJECTED',120,'Ya like jazz?','2019-11-20 00:26:44'),(1,'rob.boss@gmail.com','COMPLETED',100,'I can paint it too','2019-11-20 00:28:35');
+INSERT INTO `Transaction` VALUES (1,'jazz.hands@gmail.com','COMPLETED',500,'Ya like jazz?','2019-11-21 02:11:00'),(3,'jazz.hands@gmail.com','REJECTED',100,'Jazzzz','2019-11-21 02:09:58'),(3,'rob.boss@gmail.com','CONFIRMED',150,'I can paint happy trees','2019-11-21 02:09:58');
 /*!40000 ALTER TABLE `Transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -202,4 +260,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-19 21:11:37
+-- Dump completed on 2019-11-20 21:14:19

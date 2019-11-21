@@ -50,6 +50,7 @@
 ### Test User Logins:
 * Customer
     * U: dp2387@nyu.edu		P: oddjobdev
+    * U: scarface@gmail.com	P: pushittothelimit
 * Worker
     * U: rob.boss@gmail.com	P: happyaccident
     * U: jazz.hands@gmail.com	P: kindofblue
