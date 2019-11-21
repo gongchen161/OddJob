@@ -45,6 +45,7 @@
         * Admin can approve skills by going to localhost:5000/admin
     * Once a worker has skills approved, they can go to the job search page to search an area for jobs that coincide with their skills.
     * A worker places their bid on a job, at which point the customer can go to their job page and accept a worker of their choice.
+        * To help customer select the worker, the customer can view all the bids as well as the profile of the workers
     * Workers also have access to a support portal where they can send admin messages.
 
     * localhost:5000/admin is the admin portal which contains pending skills and support messages
@@ -61,5 +62,6 @@
 ### Changes from design plan:
 * Instead of workers and customers rating each other, now only customers can rate workers
     * This was done to allow new customers without ratings to still have jobs fulfilled
-* Customers now request jobs which workers then bid on, rather than a having a worker post a job
+* Customers now request jobs which workers then bid on, rather than having a worker post a job or the server sends a list of worker 
     * This was done to ensure specific customer needs would be met
+    * We want to give workers more freedom and let them decide on the price
