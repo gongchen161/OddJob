@@ -36,7 +36,7 @@
     * After a customer registers and logs in, they are redirected to the Jobs page where they can view their job requests, pending jobs, and job history.
     * From the nav bar, the user can go to the job post page where they can post jobs with a specified job type, job location, and a short description.
     * The nav bar also has a link to the user profile, where they can edit their address, change their password, and change their basic information.
-    * Their is also a support page where users can email admin with any issues.
+    * Their is also a support page where users can message admin with any issues and admin can respond from the admin portal.
     * After logging out, a user is redirected back to the home page.
 
     * At the home page, users can switch to the worker site where they can register/login a worker account.
@@ -47,7 +47,8 @@
     * A worker places their bid on a job, at which point the customer can go to their job page and accept a worker of their choice.
     * Workers also have access to a support portal where they can send admin messages.
 
-    * localhost:5000/admin is the admin portal which contains pending skills and support messages, which can be responded to
+    * localhost:5000/admin is the admin portal which contains pending skills and support messages
+        * Portal is not secured for demo purposes
 
 ### Test User Logins:
 * Customer
