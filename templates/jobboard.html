@@ -3,9 +3,10 @@
 {% extends "layout.html" %}
  
 {% block content %} 
-
+  
     <h2> Open Jobs </h2>
     <fieldset>
+        <font size="2" face="Helvetica Neue">
         <legend><h2>Search</h2></legend>
         <form action="/searchJobAuth" method="POST">
             Your Approved Job Type: <br>
@@ -78,6 +79,7 @@
     {% if jobs %}
     {% for line in jobs %}
     <fieldset>
+      <font size="2" face="Helvetica Neue">
         <legend><h2>{{line.jobname}}</h2></legend>
         <p>Job Type: {{line.jobtype}}</p>
         <p>Job City: {{line.jobcity}}</p>

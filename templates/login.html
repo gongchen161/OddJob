@@ -7,11 +7,11 @@
 		{% if session['message'] %}
 		<p><strong>{{session['message']}}</strong></p>
 		{% endif %}
-
+		<font size="3" face="Helvetica Neue">
 		<form action="/loginAuth" method="POST">
 			Email:
 			<input type="email" name = "email" placeholder="Email" required/> </br>
-			Password
+			Password:
 			<input type="password" name = "password" placeholder="Password" required/></br>
 			<input type="hidden" name='accountType' value='{{type}}' />
 			<button type="submit">Log In</button>
