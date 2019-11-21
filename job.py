@@ -44,7 +44,7 @@ class Job:
 
         cursor = conn.cursor()
 
-        query = 'SELECT * FROM Transaction JOIN Account ON (Transaction.acceptoremail=account.email) WHERE jobid = %s AND (status= %s OR status=%s)'
+        query = 'SELECT * FROM Transaction JOIN Account ON (Transaction.acceptoremail=Account.email) WHERE jobid = %s AND (status= %s OR status=%s)'
         cursor.execute(query, (jobid, 'CONFIRMED', 'COMPLETED'))
 
         data = cursor.fetchone()
