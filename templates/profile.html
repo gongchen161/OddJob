@@ -20,6 +20,7 @@
 		</form>
 		</fieldset>
 
+		{% if session['account']['accounttype'] =='CUSTOMER' %}
 		<fieldset>
 		<legend><h2>My Addresses</h2></legend>
 		{% if addresses %}
@@ -112,7 +113,7 @@
 				<button type="submit">Submit</button>
 			</form>
 		</fieldset>
-
+		{% endif %}
 		<fieldset>
 		<legend><h2>Change Password</h2></legend>
 		{% if session['message'] %}
