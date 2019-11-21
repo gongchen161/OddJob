@@ -45,12 +45,12 @@ class Address:
 
 
 	@staticmethod
-	def editAddress(conn, email, alias, address, city, state):
+	def editAddress(conn, email, alias, address):
 
 		cursor = conn.cursor()
 
-		query = 'UPDATE Address SET address = %s, city = %s, state = %s WHERE email = %s AND alias = %s'
-		cursor.execute(query, (address, city, state, email, alias))
+		query = 'UPDATE Address SET address = %s WHERE email = %s AND alias = %s'
+		cursor.execute(query, (address, email, alias))
 
 		conn.commit()
 		cursor.close()

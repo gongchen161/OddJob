@@ -99,9 +99,8 @@
 
         {% if messages %}
             {% for line in messages %}
-            <p>{{line.firstname}} {{line.lastname}}</p>
-            <p>{{line.quote}}</p>
-            <p>{{line.messagetime}}</p>
+            <p><b>{{line.firstname}} {{line.lastname}}</b> says</p>
+            <p>{{line.quote}} on {{line.messagetime}}</p>
             <hr>
             {% endfor %}
         {% else %}
@@ -130,9 +129,9 @@
     <fieldset>
         <legend><h2>Rating</h2></legend>
         {% if rate and rate.rating %}
-            <h3>Rating: {{rate.rating}}</h3>
-            <h3>Comment: {{rate.comment}}</h3>
-            <h3>Time: {{rate.ratingtime}}</h3>
+            <p>Rating: {{rate.rating}}</p>
+            <p>Comment: {{rate.comment}}</p>
+            <p>Time: {{rate.ratingtime}}</p>
         {% elif session['account']['accounttype']=='CUSTOMER' %}
         <legend>Rating</legend>
         <form action="/rateAuth" method="POST">
