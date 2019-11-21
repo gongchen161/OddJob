@@ -24,7 +24,7 @@
                                 <button type="submit" style="width:10%;display:inline-block; float:right padding:0; margin:0">Confirm</button>
                             </form>
                     {% else %}
-                        <p>Please Add a valie address in this City and State</p>
+                        <p><b>Please Add a valie address in this City and State</b></p>
                     {% endif %}
                 {% endif %}
 
@@ -99,7 +99,7 @@
 
         {% if messages %}
             {% for line in messages %}
-            <p>{{line.email}}</p>
+            <p>{{line.firstname}} {{line.lastname}}</p>
             <p>{{line.quote}}</p>
             <p>{{line.messagetime}}</p>
             <hr>
