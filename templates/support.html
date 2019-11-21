@@ -4,20 +4,42 @@
     </head>
 
 	<body>
-		<h2>Hi {{session['account']}}</h2> 
+		<h2 style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bold; line-height: 20px; color:; black;">Hi {{session['account']}}</h2> 
         <br>
 		<a href="/logout">Logout</a>
 
-
+        <div>
+            <h2 style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bold; line-height: 20px; color: black; text-align: center;"> Need Help? Contact Us Below:</h2>
+        </div>
+       
         <fieldset>
+<<<<<<< HEAD
             <legend>Send Message To Support</legend>
             <form action="/sendMessageAuth" method="POST">
                 <input type="textarea" name = "info" placeholder="Place Your Comment" required/> </br>
                 <input type="submit" value = Post />
+=======
+            <font size="3" face="Helvetica Neue">
+            <h2>Send Us a Message!</h2>
+            <form action="/addMessage" method="POST">
+                Name:
+                <input type="text" name = "name" placeholder="Name" required/> </br>
+                Email: 
+                <input type="email" name = "email" placeholder="Email" required/> </br>
+                Message: 
+                <input type="textarea" name = "message" placeholder="Enter your message." required/> </br>
+                <input type="submit" value = Send />
+>>>>>>> f508155e4ab392c848c956291238dc8bc7ee7a88
             </form>
         </fieldset>
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> f508155e4ab392c848c956291238dc8bc7ee7a88
     </body>
 </html>
 

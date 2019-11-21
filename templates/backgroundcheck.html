@@ -3,11 +3,12 @@
 {% block content %} 
 
 <fieldset>
-   			<legend><h2>{{type}} Background Check Application</h2></legend>
+   			<legend><h2 style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bold; line-height: 20px; color: black;">{{type}} Background Check Application</h2></legend>
 	   		{% if session['message'] %}
 				<p><strong>{{session['message']}}</strong></p>
 			{% endif %}
 
+		<font size="2" face="Helvetica Neue">
 		<form action="/backgroundCheckAuth" method="POST">
 			First Name: {{session['account']['firstname']}}</br>
 			Last Name: {{session['account']['lastname']}} </br>
@@ -23,7 +24,7 @@
 
 
 	<fieldset>
-   		<legend><h2>Pending Skills Application</h2></legend>
+   		<legend><h2 style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bold; line-height: 20px; color: black;">Pending Skills Application</h2></legend>
 
 			{% for line in pendingSkills %}
 			 <p>{{line}}</p>
@@ -32,7 +33,7 @@
 	</fieldset>
 
 	<fieldset>
-   		<legend><h2>Approved Skills</h2></legend>
+   		<legend><h2 style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: bold; line-height: 20px; color: black;">Approved Skills</h2></legend>
 
 			{% for line in approvedSkills %}
 			 <p>{{line}}</p>
