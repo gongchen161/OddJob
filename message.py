@@ -6,7 +6,7 @@ class Message:
 
 		cursor = conn.cursor()
 
-		query = 'SELECT * FROM Message WHERE jobid=%s ORDER BY messagetime;'
+		query = 'SELECT * FROM Message NATURAL JOIN Account WHERE jobid=%s ORDER BY messagetime;'
 		cursor.execute(query, (jobid))
 
 

@@ -6,9 +6,9 @@
         <link rel="stylesheet" href='/static/customerStyle.css' />
     {% elif not session.get('account') and type =='WORKER' %}
         <link rel="stylesheet" href='/static/workerStyle.css' />
-     {% elif session['account']['accounttype'] == 'CUSTOMER' %}
+     {% elif session['account'] and session['account']['accounttype'] == 'CUSTOMER' %}
         <link rel="stylesheet" href='/static/customerStyle.css' />
-    {% elif session['account']['accounttype'] == 'WORKER' %}
+    {% elif session['account'] and session['account']['accounttype'] == 'WORKER' %}
        <link rel="stylesheet" href='/static/workerStyle.css' />
     {% endif %}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
@@ -22,9 +22,9 @@
                     <a href="/" ><i class="fas fa-home"></i>OddJob</a>
                 {% elif not session.get('account') and type =='WORKER' %}
                     <a href="/worker" ><i class="fas fa-home"></i>OddJob</a>
-                 {% elif session['account']['accounttype'] == 'CUSTOMER' %}
+                 {% elif session['account'] and session['account']['accounttype'] == 'CUSTOMER' %}
                     <a href="/" >OddJob<i class="fas fa-home"></i></a>
-                {% elif session['account']['accounttype'] == 'WORKER' %}
+                {% elif session['account'] and session['account']['accounttype'] == 'WORKER' %}
                     <a href="/worker" ><i class="fas fa-home"></i>OddJob</a>
                 {% endif %}
                 <div class="nav-right">
@@ -36,13 +36,13 @@
                         <a href="/login/WORKER" >Login</a>
                         <a href="/register/WORKER" >Register</a>
                         <a href="/" >I'm A Customer</a>
-                     {% elif session['account']['accounttype'] == 'CUSTOMER' %}
+                     {% elif session['account'] and session['account']['accounttype'] == 'CUSTOMER' %}
                         <a href="/home" >My Jobs</a>
                         <a href="/jobpost" >Post A Job</a>
                         <a href="/profile" >Account</a>
                         <a href="/support" > Support </a>
                         <a href="/logout" >Logout</a>
-                    {% elif session['account']['accounttype'] == 'WORKER' %}
+                    {% elif session['account'] and session['account']['accounttype'] == 'WORKER' %}
                         <a href="/homeworker" >My Jobs</a>
                         <a href="/jobboard" >View Open Jobs</a>
                          <a href="/backgroundcheck" >My Skills</a>

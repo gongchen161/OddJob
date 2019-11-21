@@ -47,7 +47,7 @@ def indexWorker():
 def home():
     session['message'] = None
     #Only CUSTOMER can access this page
-    if (session['account'] == None or session['account']['accounttype'] != "CUSTOMER"):
+    if (session.get("account") is None or session['account']['accounttype'] != "CUSTOMER"):
         return render_template('error.html')
 
     email = session['account']['email']
@@ -65,7 +65,7 @@ def home():
 def homeWorker():
     session['message'] = None
     #Only WORKER can access this page
-    if (session['account'] == None or session['account']['accounttype'] != "WORKER"):
+    if (session.get("account") is None or session['account']['accounttype'] != "WORKER"):
         return render_template('error.html')
 
     email = session['account']['email']
@@ -79,7 +79,7 @@ def homeWorker():
 @app.route('/profile')
 def profile():
      #Only WORKER can access this page
-    if (session['account'] == None):
+    if (session.get("account") is None):
         return render_template('error.html')
 
     email = session['account']['email']
@@ -92,7 +92,7 @@ def profile():
 def jobBoard():
     session['message'] = None
      #Only WORKER can access the job board
-    if (session['account'] == None or session['account']['accounttype'] != "WORKER"):
+    if (session.get("account") is None or session['account']['accounttype'] != "WORKER"):
         return render_template('error.html')
 
     email = session['account']['email']
@@ -194,7 +194,7 @@ def logout():
 def jobPost():
     session['message'] = None
      #Only CUSTOMER can post a job
-    if (session['account'] == None or session['account']['accounttype'] != "CUSTOMER"):
+    if (session.get("account") is None or session['account']['accounttype'] != "CUSTOMER"):
         return render_template('error.html')
 
     allSkills = Skill.validSkills
@@ -312,7 +312,7 @@ def updateProfileAuth():
 @app.route('/job/<id>')
 def viewJob(id):
     session['message'] = None
-    if (session['account'] == None):
+    if (session.get("account") is None):
         return render_template('error.html')
 
     job = Job.getJobInfo(conn, id)
@@ -333,7 +333,7 @@ def viewJob(id):
 def viewWorker(email):
     session['message'] = None
      #Only the Customer can access this page
-    if (session['account'] == None or session['account']['accounttype'] != "CUSTOMER"):
+    if (session.get("account") is None or session['account']['accounttype'] != "CUSTOMER"):
         return render_template('error.html')
 
     worker = Account.getAccountInfo(conn, email)
@@ -350,7 +350,7 @@ def viewWorker(email):
 def backgroundCheck():
     session['message'] = None
      #Only the Customer can access this page
-    if (session['account'] == None or session['account']['accounttype'] != "WORKER"):
+    if (session.get("account") is None or session['account']['accounttype'] != "WORKER"):
         return render_template('error.html')
     remainingSkills = Skill.getRemainingSkills(conn, session['account']['email'])
     pendingSkills = Skill.getPendingSkills(conn, session['account']['email'])
