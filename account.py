@@ -35,9 +35,7 @@ class Account:
 
 	@staticmethod
 	def getAccountInfo(conn, email):
-		#cursor used to send queries
 		cursor = conn.cursor()
-		#executes query
 		query = 'SELECT * FROM Account WHERE email = %s'
 		cursor.execute(query, (email))
 		data = cursor.fetchone()
@@ -49,31 +47,23 @@ class Account:
 
 	@staticmethod
 	def update(conn, fname, lname, email, motto):
-		#cursor used to send queries
 		cursor = conn.cursor()
-		#executes query
 		query = 'UPDATE Account SET firstname = %s, lastname = %s, motto = %s WHERE email = %s'
 		cursor.execute(query, (fname, lname, motto, email))
-		#stores the results in a variable
 
 		query = 'SELECT * FROM Account WHERE email = %s'
 		cursor.execute(query, (email))
 		data = cursor.fetchone()
-		#use fetchall() if you are expecting more than 1 data row
 		cursor.close()
 
 		return data
 
 	@staticmethod
 	def checkLogIn(conn, email, password, accountType):
-		#cursor used to send queries
 		cursor = conn.cursor()
-		#executes query
 		query = 'SELECT * FROM Account WHERE email = %s and password = SHA2(%s, 256) and accounttype = %s'
 		cursor.execute(query, (email, password, accountType))
-		#stores the results in a variable
 		data = cursor.fetchone()
-		#use fetchall() if you are expecting more than 1 data row
 		cursor.close()
 
 		return data
@@ -94,7 +84,6 @@ class Account:
 	
 	@staticmethod
 	def getAllCompletedTransactions(conn, email):
-		#cursor used to send queries
 		cursor = conn.cursor()
 
 		ins = 'SELECT * FROM Rate JOIN Transaction USING (jobid) JOIN Job USING (jobid) WHERE acceptoremail = %s AND status = %s'
@@ -108,7 +97,6 @@ class Account:
 
 	@staticmethod
 	def comparePassword(conn, email, password):
-		#cursor used to send queries
 		cursor = conn.cursor()
 
 		query = 'SELECT * FROM Account WHERE email=%s AND password=SHA2(%s, 256)'
@@ -122,7 +110,6 @@ class Account:
 
 	@staticmethod
 	def updatePassword(conn, email, password):
-		#cursor used to send queries
 		cursor = conn.cursor()
 
 		query = 'UPDATE Account SET password=SHA2(%s, 256) WHERE email=%s'

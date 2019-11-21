@@ -8,11 +8,10 @@ from skill import Skill
 from message import Message
 from address import Address
 from support import Support
-#Initialize the app from Flask
+
 app = Flask(__name__)
 
 
-#Configure MySQL
 
 conn = pymysql.connect(host='localhost',
                        port = 3306,
@@ -87,7 +86,7 @@ def profile():
     return render_template('profile.html', addresses = addresses)
 
 
-#Define a route to hello function
+#Define a route to jobBoard function
 @app.route('/jobboard')
 def jobBoard():
     session['message'] = None
@@ -107,7 +106,7 @@ def jobBoard():
 def register(type):
 	#redirect to user's home
     if (session.get('account')):
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
 
     type2='OddJob Customer'
 
@@ -171,7 +170,6 @@ def loginAuth():
     
     if(data):
         #creates a session for the the user
-        #session is a built in
         session['account'] = data
         if (accountType == 'CUSTOMER'):
             return redirect(url_for('home'))
@@ -189,7 +187,6 @@ def logout():
     return redirect('/')
 
 
-#Define route for login
 @app.route('/jobpost')
 def jobPost():
     session['message'] = None
@@ -200,7 +197,6 @@ def jobPost():
     allSkills = Skill.validSkills
     return render_template('jobpost.html', allSkills=allSkills)
 
-#Define route for login
 @app.route('/jobPostAuth', methods=['GET', 'POST'])
 def jobPostAuth():
 
@@ -216,10 +212,9 @@ def jobPostAuth():
     
     return redirect(url_for('home'))
 
-#Define route for login
 @app.route('/acceptJobAuth', methods=['GET', 'POST'])
 def acceptJobAuth():
-    #redirect to user's home
+
     if not session.get('account'):
         return redirect(url_for('index'))
 
@@ -234,10 +229,9 @@ def acceptJobAuth():
     return redirect(url_for('jobBoard'))
 
 
-#Define route for login
 @app.route('/confirmJobAuth', methods=['GET', 'POST'])
 def confirmJobAuth():
-    #redirect to user's home
+
     if not session.get('account'):
         return redirect(url_for('index'))
 
@@ -248,10 +242,8 @@ def confirmJobAuth():
     return redirect(url_for('home'))
 
 
-#Define route for login
 @app.route('/completeJobAuth', methods=['GET', 'POST'])
 def completeJobAuth():
-    #redirect to user's home
     
     if not session.get('account'):
         return redirect(url_for('index'))
@@ -262,7 +254,6 @@ def completeJobAuth():
     return redirect(url_for('viewJob', id=jobId))
 
 
-#Define route for login
 @app.route('/payJobAuth', methods=['GET', 'POST'])
 def payJobAuth():
 
@@ -272,10 +263,8 @@ def payJobAuth():
     return render_template("payment.html", line=tran)
 
 
-#Define route for login
 @app.route('/rateAuth', methods=['GET', 'POST'])
 def rateAuth():
-    #redirect to user's home
     if not session.get('account'):
         return redirect(url_for('index'))
 
@@ -288,10 +277,10 @@ def rateAuth():
 
 
 
-#Define route for login
+
 @app.route('/updateProfileAuth', methods=['GET', 'POST'])
 def updateProfileAuth():
-    #redirect to user's home
+
     if not session.get('account'):
         return redirect(url_for('index'))
 
@@ -308,7 +297,7 @@ def updateProfileAuth():
     else:
         return redirect(url_for('homeWorker'))
 
-#Define route for login
+
 @app.route('/job/<id>')
 def viewJob(id):
     session['message'] = None
@@ -328,11 +317,11 @@ def viewJob(id):
 
     return render_template('error.html')
 
-#Define route for login
+
 @app.route('/viewworker/<email>')
 def viewWorker(email):
     session['message'] = None
-     #Only the Customer can access this page
+
     if (session.get("account") is None or session['account']['accounttype'] != "CUSTOMER"):
         return render_template('error.html')
 
@@ -345,11 +334,11 @@ def viewWorker(email):
 
     return render_template('viewworker.html', worker=worker, rating=rating,total=total,trans=trans)
 
-#Define route for login
+
 @app.route('/backgroundcheck')
 def backgroundCheck():
     session['message'] = None
-     #Only the Customer can access this page
+
     if (session.get("account") is None or session['account']['accounttype'] != "WORKER"):
         return render_template('error.html')
     remainingSkills = Skill.getRemainingSkills(conn, session['account']['email'])
@@ -358,10 +347,10 @@ def backgroundCheck():
     return render_template('backgroundcheck.html', remainingSkills=remainingSkills, pendingSkills=pendingSkills, approvedSkills=approvedSkills)
 
 
-#Define route for login
+
 @app.route('/backgroundCheckAuth', methods=['GET', 'POST'])
 def backgroundCheckAuth():
-    #redirect to user's home
+
     if not session.get('account'):
         return redirect(url_for('index'))
 
@@ -374,10 +363,10 @@ def backgroundCheckAuth():
 
     return redirect(url_for('backgroundCheck'))
 
-#Define route for login
+
 @app.route('/cancelJobAuth', methods=['GET', 'POST'])
 def cancelJobAuth():
-    #redirect to user's home
+
     if not session.get('account'):
         return redirect(url_for('index'))
 
@@ -389,7 +378,7 @@ def cancelJobAuth():
 
 @app.route('/searchJobAuth', methods=['GET', 'POST'])
 def searchJobAuth():
-    #redirect to user's home
+
     if not session.get('account'):
         return redirect(url_for('index'))
 
@@ -408,7 +397,7 @@ def searchJobAuth():
 
 @app.route('/addMessageAuth', methods=['GET', 'POST'])
 def addMessageAuth():
-    #redirect to user's home
+
     if not session.get('account'):
         return redirect(url_for('index'))
 

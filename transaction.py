@@ -9,9 +9,9 @@ class Transaction:
         self.note = None
 
     def postTransaction(self, conn):
-      	#cursor used to send queries
+
         cursor = conn.cursor()
-        #executes quer
+
         jobTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         ins = 'INSERT INTO Transaction (jobid, acceptoremail, status,amount, note, transactiontime ) VALUES(%s, %s, %s, %s, %s, %s)'
@@ -23,9 +23,9 @@ class Transaction:
 
     @staticmethod
     def confirmTransaction(conn, jobId, acceptorEmail):
-        #cursor used to send queries
+
         cursor = conn.cursor()
-        #executes quer
+
         jobTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         # Update the selected transaction to be CONFIRMED
@@ -50,9 +50,9 @@ class Transaction:
 
     @staticmethod
     def rateTransaction(conn, jobId, rating, comment):
-        #cursor used to send queries
+
         cursor = conn.cursor()
-        #executes quer
+
         jobTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         ins = 'UPDATE Rate SET rating = %s, comment = %s WHERE jobid = %s'
@@ -63,9 +63,9 @@ class Transaction:
 
     @staticmethod
     def completeTransaction(conn, jobId,requestorEmail) :
-        #cursor used to send queries
+
         cursor = conn.cursor()
-        #executes quer
+
         jobTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         ins = 'UPDATE Transaction SET status = %s WHERE jobid = %s AND status = %s'
@@ -86,7 +86,7 @@ class Transaction:
 
     @staticmethod
     def getConfirmedTransaction(conn, jobId):
-        #cursor used to send queries
+
         cursor = conn.cursor()
     
         ins = 'SELECT * FROM Transaction JOIN Job USING (jobid) JOIN Account ON (Transaction.acceptoremail=Account.email) WHERE jobid = %s AND status = %s'

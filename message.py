@@ -20,9 +20,8 @@ class Message:
 	@staticmethod
 	def addMessage(conn, jobid, email, quote):
 
-		#cursor used to send queries
 		cursor = conn.cursor()
-		#executes quer
+
 		messageTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 		query = 'INSERT INTO Message (jobid, email, messagetime,quote ) VALUES(%s, %s, %s, %s)'
