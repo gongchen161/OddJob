@@ -48,6 +48,7 @@
     * Workers also have access to a support portal where they can send admin messages.
 
     * localhost:5000/admin is the admin portal which contains pending skills and support messages
+        * Portal is not secured for demo purposes
 
 ### Test User Logins:
 * Customer
