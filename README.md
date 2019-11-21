@@ -45,7 +45,9 @@
         * Admin can approve skills by going to localhost:5000/admin
     * Once a worker has skills approved, they can go to the job search page to search an area for jobs that coincide with their skills.
     * A worker places their bid on a job, at which point the customer can go to their job page and accept a worker of their choice.
-    * Workers also have access to a support portal.
+    * Workers also have access to a support portal where they can send admin messages.
+
+    * localhost:5000/admin is the admin portal which contains pending skills and support messages, which can be responded to
 
 ### Test User Logins:
 * Customer
